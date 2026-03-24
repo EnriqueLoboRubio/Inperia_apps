@@ -1,0 +1,10 @@
+PyQt5
+bcrypt
+sounddevice
+PyAudio
+vosk
+openai-whisper
+numpy
+reportlab
+psycopg2-binary
+pyinstaller

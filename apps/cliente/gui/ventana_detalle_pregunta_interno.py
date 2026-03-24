@@ -1,0 +1,239 @@
+import os
+
+from PyQt5.QtCore import QUrl, Qt, QSize
+from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5.QtWidgets import (
+    QApplication,
+    QDialog,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QSlider,
+    QTextEdit,
+    QVBoxLayout,
+)
+
+from db.pregunta_db import obtener_preguntas_como_diccionario
+from gui.estilos import *
+
+
+def cargar_datos_preguntas():
+    return obtener_preguntas_como_diccionario()
+
+
+class VentanaDetallePregunta(QDialog):
+    def __init__(self, pregunta, numero, audio_loader=None, parent=None):
+        super().__init__(parent)
+
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Dialog)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+
+        self.pregunta_actual = pregunta
+        self.num_pregunta = numero
+        self._audio_loader = audio_loader
+        self.id_respuesta = getattr(pregunta, "id_respuesta", None)
+
+        self.PREGUNTAS_DATA = cargar_datos_preguntas()
+
+        self.setWindowTitle(f"Detalle Pregunta {self.num_pregunta}")
+        self.setFixedSize(1000, 600)
+
+        layout_contenedor = QVBoxLayout(self)
+        layout_contenedor.setContentsMargins(0, 0, 0, 0)
+
+        self.frame_fondo = QFrame()
+        self.frame_fondo.setObjectName("FondoDetalle")
+        self.frame_fondo.setStyleSheet(ESTILO_VENTANA_DETALLE)
+
+        layout_contenedor.addWidget(self.frame_fondo)
+
+        principal_layout = QVBoxLayout(self.frame_fondo)
+        principal_layout.setSpacing(20)
+        principal_layout.setContentsMargins(10, 10, 10, 10)
+
+        top_layout = QHBoxLayout()
+        datos = self.PREGUNTAS_DATA.get(str(self.num_pregunta), {})
+        titulo_json = datos.get("titulo", f"Pregunta {self.num_pregunta}")
+
+        titulo_texto = f"Pregunta {self.num_pregunta}: {titulo_json}"
+        lbl_titulo = QLabel(titulo_texto)
+        lbl_titulo.setFont(QFont("Arial", 16, QFont.Bold))
+        lbl_titulo.setStyleSheet("border: none; color: black;")
+        lbl_titulo.setAlignment(Qt.AlignLeft)
+        top_layout.addWidget(lbl_titulo)
+
+        top_layout.addStretch()
+        boton_cerrar_superior = QPushButton("×")
+        boton_cerrar_superior.clicked.connect(self.close)
+        boton_cerrar_superior.setFixedSize(24, 24)
+        boton_cerrar_superior.setStyleSheet(
+            """
+            QPushButton {
+                background: transparent;
+                border: none;
+                color: #666666;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            QPushButton:hover {
+                background-color: #F1F1F1;
+                border: 1px solid #E0E0E0;
+                border-radius: 12px;
+                color: #111111;
+            }
+            """
+        )
+        boton_cerrar_superior.setCursor(Qt.PointingHandCursor)
+        boton_cerrar_superior.setToolTip("Cerrar detalles de la pregunta")
+        top_layout.addWidget(boton_cerrar_superior)
+
+        principal_layout.addLayout(top_layout)
+
+        lbl_transcripcion = QLabel("<b>Transcripcion:</b>")
+        lbl_transcripcion.setFont(QFont("Arial", 11))
+        principal_layout.addWidget(lbl_transcripcion)
+
+        self.txt_respuesta = QTextEdit()
+        self.txt_respuesta.setReadOnly(True)
+        self.txt_respuesta.setStyleSheet(ESTILO_INPUT)
+        self.txt_respuesta.setText(pregunta.respuesta)
+        self.txt_respuesta.setMinimumHeight(60)
+        principal_layout.addWidget(self.txt_respuesta)
+
+        self.player = QMediaPlayer()
+
+        audio_layout = QVBoxLayout()
+        audio_layout.setSpacing(10)
+
+        self.lbl_estado_audio = QLabel("")
+        self.lbl_estado_audio.setAlignment(Qt.AlignCenter)
+        self.lbl_estado_audio.setStyleSheet("color: #6B7280; font-size: 12px;")
+
+        self.slider_audio = QSlider(Qt.Horizontal)
+        self.slider_audio.setRange(0, 0)
+        self.slider_audio.setCursor(Qt.PointingHandCursor)
+        self.slider_audio.setStyleSheet(ESTILO_SLIDER)
+
+        time_layout = QHBoxLayout()
+        self.lbl_tiempo_actual = QLabel("00:00")
+        self.lbl_tiempo_total = QLabel("00:00")
+
+        for lbl in (self.lbl_tiempo_actual, self.lbl_tiempo_total):
+            lbl.setFont(QFont("Arial", 10))
+            lbl.setStyleSheet("color: #374151;")
+
+        time_layout.addWidget(self.lbl_tiempo_actual)
+        time_layout.addStretch()
+        time_layout.addWidget(self.lbl_estado_audio)
+        time_layout.addStretch()
+        time_layout.addWidget(self.lbl_tiempo_total)
+
+        self.boton_play = QPushButton()
+        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIconSize(QSize(20, 20))
+        self.boton_play.setFixedSize(30, 30)
+        self.boton_play.setCursor(Qt.PointingHandCursor)
+        self.boton_play.setStyleSheet(
+            """
+            QPushButton {
+                background: rgba(200, 200, 200, 0.6);
+                border-radius: 15px;
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgba(128, 128, 128, 0.6);
+            }
+            QPushButton[estado_grabando="true"] {
+                background-color: #FF0000;
+            }
+            QPushButton[estado_grabando="true"]:hover {
+                background-color: #CC0000;
+            }
+            """
+        )
+        self.boton_play.clicked.connect(self.toggle_audio)
+        if self._audio_loader is None and not getattr(self.pregunta_actual, "archivo_audio", None):
+            self.boton_play.setEnabled(False)
+            self.boton_play.setToolTip("Desactivado: la API de audio no está disponible.")
+
+        audio_layout.addWidget(self.boton_play, alignment=Qt.AlignCenter)
+        audio_layout.addWidget(self.slider_audio)
+        audio_layout.addLayout(time_layout)
+
+        self.player.positionChanged.connect(self.actualizar_posicion)
+        self.player.durationChanged.connect(self.actualizar_duracion)
+        self.slider_audio.sliderMoved.connect(self.player.setPosition)
+        self.player.stateChanged.connect(self.cambio_estado)
+
+        principal_layout.addLayout(audio_layout)
+
+    def reproducir_audio(self, ruta):
+        if ruta and os.path.exists(ruta):
+            try:
+                full_path = os.path.abspath(ruta)
+                url = QUrl.fromLocalFile(full_path)
+                content = QMediaContent(url)
+                self.player.setMedia(content)
+                self.player.play()
+                self.lbl_estado_audio.setText("Reproduciendo...")
+                self.lbl_estado_audio.setStyleSheet("color: green;")
+            except Exception as e:
+                self.lbl_estado_audio.setText(f"Error: {str(e)}")
+        else:
+            self.lbl_estado_audio.setText("Archivo de audio no encontrado")
+            self.lbl_estado_audio.setStyleSheet("color: red;")
+
+    def toggle_audio(self):
+        ruta = getattr(self.pregunta_actual, "archivo_audio", None)
+        if (not ruta or not os.path.exists(ruta)) and self._audio_loader is not None and self.id_respuesta:
+            try:
+                self.lbl_estado_audio.setText("Descargando audio...")
+                self.lbl_estado_audio.setStyleSheet("color: #374151;")
+                QApplication.processEvents()
+                ruta = self._audio_loader(self.id_respuesta)
+                self.pregunta_actual.set_archivo_audio(ruta)
+            except Exception as e:
+                self.lbl_estado_audio.setText(f"No se pudo descargar el audio: {e}")
+                self.lbl_estado_audio.setStyleSheet("color: red;")
+                return
+
+        if not ruta or not os.path.exists(ruta):
+            self.lbl_estado_audio.setText("Archivo de audio no encontrado")
+            self.lbl_estado_audio.setStyleSheet("color: red;")
+            return
+
+        if self.player.mediaStatus() == QMediaPlayer.NoMedia:
+            url = QUrl.fromLocalFile(os.path.abspath(ruta))
+            self.player.setMedia(QMediaContent(url))
+
+        if self.player.state() == QMediaPlayer.PlayingState:
+            self.player.pause()
+        else:
+            self.player.play()
+
+    def cambio_estado(self, estado):
+        if estado == QMediaPlayer.PlayingState:
+            self.boton_play.setIcon(QIcon("assets/pausa.png"))
+            self.boton_play.setIconSize(QSize(15, 15))
+            self.lbl_estado_audio.setText("Reproduciendo...")
+            self.lbl_estado_audio.setStyleSheet("color: green;")
+        else:
+            self.boton_play.setIcon(QIcon("assets/play.png"))
+            self.boton_play.setIconSize(QSize(20, 20))
+            self.lbl_estado_audio.setText("")
+
+    def actualizar_posicion(self, posicion):
+        self.slider_audio.setValue(posicion)
+        self.lbl_tiempo_actual.setText(self.formatear_tiempo(posicion))
+
+    def actualizar_duracion(self, duracion):
+        self.slider_audio.setRange(0, duracion)
+        self.lbl_tiempo_total.setText(self.formatear_tiempo(duracion))
+
+    def formatear_tiempo(self, ms):
+        segundos = ms // 1000
+        minutos = segundos // 60
+        segundos = segundos % 60
+        return f"{minutos:02}:{segundos:02}"
