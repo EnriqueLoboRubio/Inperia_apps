@@ -1,6 +1,6 @@
 # Inperia Apps
 
-Esta carpeta es una separación de `Inperia` preparada para generar dos productos sin tocar el proyecto original:
+Esta carpeta es una separación de `Inperia` preparada para generar dos productos:
 
 - `Inperia Cliente`: acceso exclusivo para internos.
 - `Inperia Staff`: acceso para profesionales y administradores.
@@ -33,7 +33,7 @@ python apps/staff/main.py
 
 - Base de datos PostgreSQL accesible vía variables de entorno `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`.
 - API de audio configurada en `apps/cliente/config/config.json`, `apps/staff/config/config.json`, `shared/config.json` o la variable `INPERAUDIO_API_URL`.
-- Modelos locales de Vosk y Whisper en `shared/utils/` si vas a usar transcripción.
+- Modelos locales de Vosk en `shared/utils/` para la transcripción.
 
 ## Build de ejecutables
 
