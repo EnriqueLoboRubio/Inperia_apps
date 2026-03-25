@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayo
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QPixmap
 
-from db.pregunta_db import obtener_preguntas_como_diccionario, insertar_o_actualizar_pregunta
+from db.pregunta_db import obtener_preguntas_como_diccionario
 from gui.estilos import *
 
 
@@ -18,6 +18,7 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
         self._datos_iniciales = obtener_preguntas_como_diccionario().get(str(self.numero_pregunta), {})
         self._titulo_inicial = self._datos_iniciales.get("titulo", f"Pregunta {self.numero_pregunta}")
         self._texto_inicial = self._datos_iniciales.get("texto", "")
+        self._ayuda_inicial = self._datos_iniciales.get("ayuda", "")
 
         self.setWindowTitle(f"Detalle Pregunta {self.numero_pregunta}")
         self.setFixedSize(1000, 650)
@@ -67,7 +68,7 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
         top_layout.addWidget(self.boton_cerrar)
         principal_layout.addLayout(top_layout)
 
-        lbl_titulo_edit = QLabel("<b>Título (Editable):</b>")
+        lbl_titulo_edit = QLabel("<b>Título:</b>")
         lbl_titulo_edit.setFont(QFont("Arial", 11))
         principal_layout.addWidget(lbl_titulo_edit)
 
@@ -78,7 +79,7 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
         self.txt_titulo.setFixedHeight(80)
         principal_layout.addWidget(self.txt_titulo)
 
-        lbl_pregunta_edit = QLabel("<b>Pregunta (Editable):</b>")
+        lbl_pregunta_edit = QLabel("<b>Pregunta:</b>")
         lbl_pregunta_edit.setFont(QFont("Arial", 11))
         principal_layout.addWidget(lbl_pregunta_edit)
 
@@ -88,6 +89,17 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
         self.txt_pregunta.setText(self._texto_inicial)
         self.txt_pregunta.setMinimumHeight(220)
         principal_layout.addWidget(self.txt_pregunta)
+
+        lbl_ayuda_edit = QLabel("<b>Ayuda:</b>")
+        lbl_ayuda_edit.setFont(QFont("Arial", 11))
+        principal_layout.addWidget(lbl_ayuda_edit)
+
+        self.txt_ayuda = QTextEdit()
+        self.txt_ayuda.setReadOnly(False)
+        self.txt_ayuda.setStyleSheet(ESTILO_INPUT)
+        self.txt_ayuda.setText(self._ayuda_inicial)
+        self.txt_ayuda.setMinimumHeight(120)
+        principal_layout.addWidget(self.txt_ayuda)
 
         boton_layout = QHBoxLayout()
         boton_layout.setContentsMargins(0, 0, 0, 0)
@@ -111,17 +123,17 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
             "id_pregunta": self.numero_pregunta,
             "titulo": self.txt_titulo.toPlainText().strip(),
             "texto": self.txt_pregunta.toPlainText().strip(),
+            "ayuda": self.txt_ayuda.toPlainText().strip(),
         }
 
     def guardar_datos(self):
-        datos = self.get_datos()
-        insertar_o_actualizar_pregunta(datos["id_pregunta"], datos["titulo"], datos["texto"])
         self.accept()
 
     def hay_cambios(self):
         return (
             self.txt_titulo.toPlainText().strip() != self._titulo_inicial.strip()
             or self.txt_pregunta.toPlainText().strip() != self._texto_inicial.strip()
+            or self.txt_ayuda.toPlainText().strip() != self._ayuda_inicial.strip()
         )
 
     def mostrar_confirmacion_cerrar(self):

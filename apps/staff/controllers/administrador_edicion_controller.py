@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDialog
 
+from db.pregunta_db import insertar_o_actualizar_pregunta
 from gui.ventana_detalle_edit_pregunta_profesional import (
     VentanaDetallePreguntaEditProfesional,
 )
@@ -36,6 +37,13 @@ class AdministradorEdicionController:
         resultado = ventana_detalle.exec_()
 
         if resultado == QDialog.Accepted:
+            datos = ventana_detalle.get_datos()
+            insertar_o_actualizar_pregunta(
+                datos["id_pregunta"],
+                datos["titulo"],
+                datos["texto"],
+                datos["ayuda"],
+            )
             self.controlador.ventana_administrador.pantalla_lista_modificar_preguntas.cargar_preguntas()
             self.controlador.msg.mostrar_mensaje(
                 "Guardado",

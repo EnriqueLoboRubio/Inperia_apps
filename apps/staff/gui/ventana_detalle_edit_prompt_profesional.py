@@ -320,11 +320,11 @@ class VentanaDetallePromptEditProfesional(QDialog):
         self.input_cantidad_niveles.setValue(self._cantidad_niveles)
         self._crear_boton_info_inline_en_plantilla()
 
-        self.scroll_layout.addWidget(self._label_campo("<b>Título (Editable):</b>"))
+        self.scroll_layout.addWidget(self._label_campo("<b>Título:</b>"))
         self.scroll_layout.addWidget(self.txt_titulo)
         self.scroll_layout.addWidget(self._label_campo("<b>Plantilla (bloqueando {pregunta} y {respuesta}):</b>"))
         self.scroll_layout.addWidget(self.txt_plantilla)
-        self.scroll_layout.addWidget(self._label_campo("<b>Descripción (Editable):</b>"))
+        self.scroll_layout.addWidget(self._label_campo("<b>Descripción:</b>"))
         self.scroll_layout.addWidget(self.txt_descripcion)
         self.scroll_layout.addWidget(self._label_campo("<b>Cantidad de niveles:</b>"))
         self.scroll_layout.addWidget(self.input_cantidad_niveles)
