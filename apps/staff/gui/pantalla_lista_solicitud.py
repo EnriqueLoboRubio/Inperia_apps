@@ -132,7 +132,7 @@ class TarjetaSolicitud(QFrame):
         tiene_entrevista = self._tiene_entrevista()
         boton_entrevista.setEnabled(tiene_entrevista)
         boton_entrevista.setToolTip(
-            "Ver entrevista del interno" if tiene_entrevista else "Desactivado: esta solicitud aun no tiene entrevista."
+            "Ver entrevista del interno" if tiene_entrevista else "Desactivado: esta solicitud aún no tiene entrevista."
         )
         if tiene_entrevista:
             boton_entrevista.clicked.connect(lambda _=False: self.ver_entrevista.emit(self.solicitud))
@@ -220,8 +220,8 @@ class TarjetaSolicitud(QFrame):
     def _estado_ia_visual(self):
         entrevista = getattr(self.solicitud, "entrevista", None)
         if entrevista is None:
-            return obtener_estado_ia_visual("sin evaluacion")
-        return obtener_estado_ia_visual(getattr(entrevista, "estado_evaluacion_ia", "sin evaluacion"))
+            return obtener_estado_ia_visual("Sin evaluación")
+        return obtener_estado_ia_visual(getattr(entrevista, "estado_evaluacion_ia", "Sin evaluación"))
 
 
 class PantallaListaSolicitud(QWidget):
@@ -344,7 +344,7 @@ class PantallaListaSolicitud(QWidget):
         self.boton_filtros.setFixedSize(180, 40)
         self.boton_filtros.setCursor(Qt.PointingHandCursor)
         self.boton_filtros.setEnabled(False)
-        self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aun no esta disponible.")
+        self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aún no está disponible.")
         tam_icono_filtros = self.boton_filtros.fontMetrics().height() + 3
         self.boton_filtros.setIcon(QIcon("assets/filtros.png"))
         self.boton_filtros.setIconSize(QSize(tam_icono_filtros, tam_icono_filtros))
@@ -398,7 +398,7 @@ class PantallaListaSolicitud(QWidget):
         self.actualizar_estado_consulta()
         self._render_lista()
 
-    def mostrar_error_carga(self, mensaje="Error al cargar las solicitudes. Intenta de nuevo."):
+    def mostrar_error_carga(self, mensaje="Error al cargar las solicitudes. Inténtelo de nuevo."):
         self._estado_lista = "error"
         self._mensaje_estado = mensaje
         self._items_cargados = []

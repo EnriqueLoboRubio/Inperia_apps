@@ -364,7 +364,7 @@ class VentanaDetallePromptEditProfesional(QDialog):
         )
         self.popup_ayuda.setWordWrap(True)
         self.popup_ayuda.setFixedWidth(400)
-        self.popup_ayuda.setText(self._texto_pregunta or "Sin informacion adicional.")
+        self.popup_ayuda.setText(self._texto_pregunta or "Sin información adicional.")
         self.popup_ayuda.adjustSize()
         self.popup_ayuda.hide()
 

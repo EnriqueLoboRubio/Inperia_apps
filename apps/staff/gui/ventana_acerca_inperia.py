@@ -1,1 +1,1 @@
-from shared.gui_shared.ventana_acerca_inperia import *  # noqa: F401,F403
+from shared.gui_shared.ventana_acerca_inperia import *

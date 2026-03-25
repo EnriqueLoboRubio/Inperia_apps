@@ -653,7 +653,7 @@ class VentanaInterno(QMainWindow):
 
         # --- MENSAJE ---
         lbl_mensaje = QLabel(
-            "¿Estás seguro de que quieres cerrar sesión?\n\n"
+            "¿Está seguro de que quiere cerrar sesión?\n\n"
             "Perderá los datos no guardados."
         )
         lbl_mensaje.setObjectName("TextoError")

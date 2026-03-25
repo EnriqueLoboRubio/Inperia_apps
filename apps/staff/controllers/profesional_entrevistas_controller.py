@@ -104,12 +104,12 @@ class ProfesionalEntrevistasController:
 
     def mostrar_entrevista_desde_perfil_interno(self, id_entrevista):
         if not id_entrevista:
-            self.controlador.msg.mostrar_advertencia("AtenciÃ³n", "No se encontrÃ³ la entrevista seleccionada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No se encontró la entrevista seleccionada.")
             return
 
         entrevista = self.cargar_entrevista_por_id(id_entrevista)
         if entrevista is None:
-            self.controlador.msg.mostrar_advertencia("AtenciÃ³n", "No se pudo cargar la entrevista.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No se pudo cargar la entrevista.")
             return
 
         pantalla_perfil = self.controlador.ventana_profesional.pantalla_perfil_interno
@@ -257,7 +257,7 @@ class ProfesionalEntrevistasController:
             pantalla_resumen = self.controlador.ventana_profesional.pantalla_resumen_profesional
         pantalla_resumen.refrescar_desde_modelo(entrevista)
         pantalla_resumen.set_estado_global_entrevista(
-            getattr(entrevista, "estado_evaluacion_ia", "sin evaluacion")
+            getattr(entrevista, "estado_evaluacion_ia", "Sin evaluación")
         )
         self._aplicar_bloqueos_ia_en_resumen()
 
@@ -408,13 +408,13 @@ class ProfesionalEntrevistasController:
     def guardar_evaluacion_profesional_actual(self):
         entrevista = self.controlador._entrevista_actual_resumen
         if entrevista is None or not getattr(entrevista, "id_entrevista", None):
-            self.controlador.msg.mostrar_advertencia("Atencion", "No hay entrevista cargada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No hay entrevista cargada.")
             return
 
         niveles = self._obtener_niveles_profesionales_completos(entrevista)
         if niveles is None:
             self.controlador.msg.mostrar_advertencia(
-                "Atencion",
+                "Atención",
                 "Debe completar los niveles profesionales de las 10 preguntas antes de guardar.",
             )
             return
@@ -432,7 +432,7 @@ class ProfesionalEntrevistasController:
         )
 
         self.controlador.ventana_profesional.pantalla_resumen_profesional.marcar_evaluacion_profesional_pendiente(False)
-        self.controlador.msg.mostrar_mensaje("Guardado", "La evaluacion profesional se ha guardado correctamente.")
+        self.controlador.msg.mostrar_mensaje("Guardado", "La evaluación profesional se ha guardado correctamente.")
 
     @staticmethod
     def _buscar_pregunta_entrevista(entrevista, numero_pregunta):
@@ -448,7 +448,7 @@ class ProfesionalEntrevistasController:
     def _iniciar_analisis_ia(self, preguntas, analizar_todas):
         entrevista = self.controlador._entrevista_actual_resumen
         if entrevista is None or not getattr(entrevista, "id_entrevista", None):
-            self.controlador.msg.mostrar_advertencia("Atencion", "No hay entrevista cargada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No hay entrevista cargada.")
             return
 
         payload = []
@@ -467,7 +467,7 @@ class ProfesionalEntrevistasController:
                 analizar_todas=analizar_todas,
             ):
                 return
-            self.controlador.msg.mostrar_advertencia("Atencion", "Ese analisis IA ya esta en curso o en cola.")
+            self.controlador.msg.mostrar_advertencia("Atención", "Ese análisis IA ya está en curso o en cola.")
             return
 
         self._arrancar_analisis_ia(
@@ -580,12 +580,12 @@ class ProfesionalEntrevistasController:
     def _analizar_pregunta_desde_detalle(self, ventana, numero_pregunta):
         entrevista = self.controlador._entrevista_actual_resumen
         if entrevista is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No hay entrevista cargada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No hay entrevista cargada.")
             return
 
         pregunta = self._buscar_pregunta_entrevista(entrevista, numero_pregunta)
         if pregunta is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No se encontro la pregunta seleccionada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No se encontró la pregunta seleccionada.")
             return
 
         if self.controlador._hilo_analisis_ia is not None and self.controlador._hilo_analisis_ia.isRunning():
@@ -602,11 +602,11 @@ class ProfesionalEntrevistasController:
                 ventana_detalle=ventana,
             ):
                 return
-            self.controlador.msg.mostrar_advertencia("Atencion", "Esa pregunta ya se esta analizando o ya esta en cola.")
+            self.controlador.msg.mostrar_advertencia("Atención", "Esa pregunta ya se está analizando o ya está en cola.")
             return
 
         self.controlador._ventana_detalle_analisis = self._ventana_detalle_valida(ventana)
-        ventana.set_estado_analisis("Preparando analisis...", en_progreso=True)
+        ventana.set_estado_analisis("Preparando análisis...", en_progreso=True)
         self._iniciar_analisis_ia([pregunta], analizar_todas=False)
 
     def _on_inicio_pregunta_ia(self, id_pregunta, texto_estado):
@@ -685,8 +685,8 @@ class ProfesionalEntrevistasController:
             self._refrescar_resumen_entrevista_actual()
         detalle = self.controlador._ventana_detalle_analisis
         if detalle is not None:
-            detalle.set_estado_analisis("Analisis completado.", en_progreso=False)
-        self.controlador.msg.mostrar_mensaje("IA", "Analisis IA completado correctamente.")
+            detalle.set_estado_analisis("Análisis completado.", en_progreso=False)
+        self.controlador.msg.mostrar_mensaje("IA", "Análisis IA completado correctamente.")
 
     def _on_error_analisis_ia(self, mensaje):
         pantalla = self.controlador.ventana_profesional.pantalla_resumen_profesional
@@ -705,7 +705,7 @@ class ProfesionalEntrevistasController:
             if clave in pendientes_en_cola:
                 continue
             if self._es_entrevista_resumen_actual(clave[0]):
-                pantalla.set_estado_analisis_pregunta(clave[1], "Error en el analisis.", en_progreso=False)
+                pantalla.set_estado_analisis_pregunta(clave[1], "Error en el análisis.", en_progreso=False)
         self._limpiar_bloqueos_ia_activos()
         if self._es_entrevista_resumen_actual(entrevista_id):
             pantalla.ocultar_progreso_analisis_completo()
@@ -714,7 +714,7 @@ class ProfesionalEntrevistasController:
         self._restaurar_estado_preguntas_en_cola()
         detalle = self.controlador._ventana_detalle_analisis
         if detalle is not None:
-            detalle.set_estado_analisis("Error en el analisis.", en_progreso=False)
+            detalle.set_estado_analisis("Error en el análisis.", en_progreso=False)
         self.controlador.ventana_profesional.pantalla_lista_solicitud.refrescar_tarjetas()
         self.controlador.msg.mostrar_advertencia("Error IA", mensaje)
 

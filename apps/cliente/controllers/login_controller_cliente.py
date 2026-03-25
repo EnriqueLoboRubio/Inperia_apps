@@ -51,7 +51,7 @@ class LoginControllerCliente(QObject):
         if not correo or not contrasena:
             return "Por favor, complete todos los campos."
         if not self.validar_formato_correo(correo):
-            return "Formato de correo invalido."
+            return "Formato de correo inválido."
         return None
 
     def _autenticar_usuario(self, correo, contrasena, datos_usuario):
@@ -87,7 +87,7 @@ class LoginControllerCliente(QObject):
             return {
                 "ok": False,
                 "mensaje": (
-                    "CRITICO: Ha superado el numero maximo de intentos. "
+                    "CRITICO: Ha superado el número máximo de intentos. "
                     "La cuenta ha sido eliminada. Contacte con el administrador."
                 ),
             }

@@ -2,8 +2,9 @@
 __pycache__/
 *.py[cod]
 
-# Vosk models
+# Models
 shared/utils/vosk-es/
+shared/utils/whisper-large-v2/
 
 # Data directory
 data/

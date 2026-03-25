@@ -223,7 +223,7 @@ class VentanaUsuarioAdministrador(QDialog):
         self.input_modulo = QLineEdit()
         self.input_modulo.setStyleSheet(self._estilo_input_compacto())
         self.input_modulo.setFont(QFont("Arial", 11))
-        self._agregar_fila_form(form, "modulo", "Modulo", self.input_modulo)
+        self._agregar_fila_form(form, "modulo", "Módulo", self.input_modulo)
 
         self.input_lugar_nacimiento = QLineEdit()
         self.input_lugar_nacimiento.setStyleSheet(self._estilo_input_compacto())

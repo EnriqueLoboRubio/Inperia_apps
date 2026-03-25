@@ -134,7 +134,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self.boton_ver_entrevista.setCursor(Qt.PointingHandCursor)
         self.boton_ver_entrevista.setStyleSheet(estilo_boton_accion)
         self.boton_ver_entrevista.setEnabled(False)
-        self.boton_ver_entrevista.setToolTip("Desactivado: esta solicitud no tiene entrevista.")
+        self.boton_ver_entrevista.setToolTip("Desactivado: esta solicitud aún no tiene entrevista.")
         self.boton_ver_entrevista.clicked.connect(self._sin_accion)
         fila_acciones.addWidget(self.boton_ver_entrevista)
 
@@ -142,7 +142,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self.boton_descargar_solicitud.setFixedHeight(34)
         self.boton_descargar_solicitud.setCursor(Qt.PointingHandCursor)
         self.boton_descargar_solicitud.setStyleSheet(estilo_boton_accion)
-        self.boton_descargar_solicitud.setToolTip("Descargar solicitud (próximamente).")
+        self.boton_descargar_solicitud.setToolTip("Descargue el documento de la solicitud")
         self.boton_descargar_solicitud.clicked.connect(self._sin_accion)
         fila_acciones.addWidget(self.boton_descargar_solicitud)
 

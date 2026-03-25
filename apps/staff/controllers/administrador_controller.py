@@ -212,7 +212,7 @@ class AdministradorController(QObject):
         if not id_respuesta:
             raise AudioApiError("No hay respuesta asociada al audio.")
         if self._audio_client is None:
-            raise AudioApiError(self._audio_client_error or "La API de audio no esta disponible en esta sesion.")
+            raise AudioApiError(self._audio_client_error or "La API de audio no está disponible en esta sesión.")
         return self._audio_client.ensure_audio_local(id_respuesta)
 
     def cerrar_recursos(self):
@@ -237,5 +237,5 @@ class AdministradorController(QObject):
             return
         self.msg.mostrar_advertencia(
             "Audio no disponible",
-            self._audio_client_error or "La API de audio no esta disponible. Las funciones de audio se han desactivado.",
+            self._audio_client_error or "La API de audio no está disponible. Las funciones de audio se han desactivado.",
         )

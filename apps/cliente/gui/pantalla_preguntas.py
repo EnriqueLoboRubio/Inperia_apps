@@ -8,7 +8,6 @@ import os
 from pathlib import Path
 
 from utils.transcripcionVosk import HiloTranscripcion
-#from utils.transcripcionWhisper import HiloTranscripcion
 from db.pregunta_db import obtener_preguntas_como_diccionario
 
 from gui.estilos import *
@@ -234,11 +233,6 @@ class PantallaPreguntas(QWidget):
             self.lista_audios[self.numero_pregunta - 1] = ruta_audio_salida # almacenar nueva ruta
                 
             self.hilo_grabacion = HiloTranscripcion(self.ruta_modelo_vosk, ruta_audio_salida)
-            #self.hilo_grabacion = HiloTranscripcion(
-            #    modelo_nombre="medium",  # Opciones: tiny, base, small, medium, large
-            #    archivo_salida=ruta_audio_salida,
-            #    idioma="es"
-            #)
             
             #Señales
             self.hilo_grabacion.texto_signal.connect(self.actualizar_texto_final)

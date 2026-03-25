@@ -272,7 +272,7 @@ class AdministradorUsuariosController:
             )
             entrevista.puntuacion_ia = fila["entrevista_puntuacion_ia"]
             entrevista.puntuacion_profesional = fila["entrevista_puntuacion_profesional"]
-            entrevista.estado_evaluacion_ia = fila["entrevista_estado_evaluacion_ia"] or "sin evaluacion"
+            entrevista.estado_evaluacion_ia = fila["entrevista_estado_evaluacion_ia"] or "Sin evaluación"
             solicitud.entrevista = entrevista
         return solicitud
 

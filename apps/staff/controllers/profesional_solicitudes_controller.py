@@ -251,7 +251,7 @@ class ProfesionalSolicitudesController:
                 continue
 
         if solicitud is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No se pudo cargar la solicitud seleccionada.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No se pudo cargar la solicitud seleccionada.")
             return
 
         return self._mostrar_detalle_solicitud(solicitud, solo_lectura=True)
@@ -266,7 +266,7 @@ class ProfesionalSolicitudesController:
 
         interno = self.controlador.internos._obtener_interno_de_solicitud(solicitud)
         if interno is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No se encontro la informacion del interno.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No se encontró la información del interno.")
             return
 
         pantalla = self.controlador.ventana_profesional.pantalla_detalle_solicitud
@@ -281,12 +281,12 @@ class ProfesionalSolicitudesController:
         solicitud = getattr(pantalla, "_solicitud", None)
         interno = getattr(pantalla, "_interno", None)
         if solicitud is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No hay solicitud cargada para finalizar.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No hay solicitud cargada para finalizar.")
             return
 
         puede_finalizar, motivo = self._puede_finalizar_o_descargar(solicitud)
         if not puede_finalizar:
-            self.controlador.msg.mostrar_advertencia("Atencion", motivo)
+            self.controlador.msg.mostrar_advertencia("Atención", motivo)
             return
 
         ventana = VentanaFinalizarSolicitudProfesional(
@@ -300,15 +300,15 @@ class ProfesionalSolicitudesController:
         estado_nuevo = str(datos.get("estado", "") or "").strip().lower()
         conclusiones = str(datos.get("conclusiones_profesional", "") or "").strip()
         if not conclusiones:
-            self.controlador.msg.mostrar_advertencia("Atencion", "Debe indicar una conclusion para finalizar la solicitud.")
+            self.controlador.msg.mostrar_advertencia("Atención", "Debe indicar una conclusión para finalizar la solicitud.")
             return
 
         if not self.controlador.entrevistas._tiene_evaluacion_ia(solicitud):
             confirmar = self.controlador.msg.mostrar_confirmacion(
-                "Sin evaluacion automatica",
-                "La entrevista asociada no tiene evaluacion de IA.\n"
-                "¿Esta seguro de concluir la solicitud?\n"
-                "Esta decision es definitiva.",
+                "Sin evaluación automática",
+                "La entrevista asociada no tiene evaluación de IA.\n"
+                "¿Está seguro de concluir la solicitud?\n"
+                "Esta decisión es definitiva.",
             )
             if not confirmar:
                 return
@@ -330,25 +330,25 @@ class ProfesionalSolicitudesController:
             self._configurar_acciones_detalle(pantalla, solicitud)
 
         self.controlador.actualizar_inicio_profesional()
-        self.controlador.msg.mostrar_mensaje("Verificacion", "La solicitud se ha finalizado y guardado correctamente.")
+        self.controlador.msg.mostrar_mensaje("Verificación", "La solicitud se ha finalizado y guardado correctamente.")
 
     def descargar_solicitud_desde_detalle(self):
         pantalla = self.controlador.ventana_profesional.pantalla_detalle_solicitud
         solicitud = getattr(pantalla, "_solicitud", None)
         interno = getattr(pantalla, "_interno", None)
         if solicitud is None:
-            self.controlador.msg.mostrar_advertencia("Atencion", "No hay solicitud cargada para descargar.")
+            self.controlador.msg.mostrar_advertencia("Atención", "No hay solicitud cargada para descargar.")
             return
 
         puede_descargar, motivo = self._puede_finalizar_o_descargar(solicitud)
         if not puede_descargar:
-            self.controlador.msg.mostrar_advertencia("Atencion", motivo)
+            self.controlador.msg.mostrar_advertencia("Atención", motivo)
             return
 
         incluir_detalles_entrevista = self.controlador.msg.mostrar_confirmacion(
             "Incluir entrevista",
             "¿Desea incluir detalles de la entrevista en el PDF?\n\n"
-            "Si selecciona 'No', se generara el mismo PDF estandar del interno.",
+            "Si selecciona 'No', se generará el mismo PDF estándar del interno.",
         )
 
         try:
@@ -428,10 +428,10 @@ class ProfesionalSolicitudesController:
         solicitud_finalizada = estado in estados_finales and bool(conclusiones)
 
         if id_prof_solicitud is None:
-            return False, "La solicitud y su entrevista no estan asignadas a ningun profesional."
+            return False, "La solicitud y su entrevista no están asignadas a ningún profesional."
 
         if id_prof_solicitud != id_prof_actual:
-            return False, "La solicitud y su entrevista estan asignadas a otro profesional."
+            return False, "La solicitud y su entrevista están asignadas a otro profesional."
 
         if solicitud_finalizada:
             return False, "La solicitud ya ha sido finalizada."

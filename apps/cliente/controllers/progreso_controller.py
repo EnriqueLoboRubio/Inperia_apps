@@ -88,7 +88,7 @@ class ProgresoController(QObject):
         self.vista.boton_entrevista.setEnabled(disponible)
         if not disponible:
             self.vista.boton_entrevista.setToolTip(
-                "Desactivado: aun no hay entrevista disponible."
+                "Desactivado: aún no hay entrevista disponible."
             )
             return
 

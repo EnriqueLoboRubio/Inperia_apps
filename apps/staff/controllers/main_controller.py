@@ -109,8 +109,10 @@ class StaffMainController:
                 self.controlador_profesional.msg.mostrar_advertencia(
                     "Ollama no disponible",
                     self._ollama_service.error_message
-                    or "No se pudo iniciar Ollama. Las funciones de analisis IA pueden fallar.",
+                    or "No se pudo iniciar Ollama. Las funciones de análisis IA pueden fallar.",
                 )
+            else:
+                self.controlador_profesional.msg.mostrar_mensaje("Ollama disponible", "Ollama se ha iniciado correctamente.")
             return
         self.controlador_administrador = AdministradorController(usuario, contrasena_plana)
         self._aplicar_icono_ventana(self.controlador_administrador.ventana_administrador)

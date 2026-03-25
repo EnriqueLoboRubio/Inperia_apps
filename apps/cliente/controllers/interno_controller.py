@@ -371,7 +371,7 @@ class InternoController(QObject):
         if not isinstance(resultado_guardado, dict):
             self.msg.mostrar_mensaje(
                 "Error en entrevista",
-                "No ha podido realizarse el envio de la entrevista.\n\nContacte con un administrador.",
+                "No ha podido realizarse el envío de la entrevista.\n\nContacte con un administrador.",
             )
             return
 
@@ -390,7 +390,7 @@ class InternoController(QObject):
         if not id_entrevista:
             self.msg.mostrar_mensaje(
                 "Error en entrevista",
-                "No ha podido realizarse el envio de la entrevista.\n\nContacte con un administrador.",
+                "No ha podido realizarse el envío de la entrevista.\n\nContacte con un administrador.",
             )
             return
 
@@ -571,7 +571,7 @@ class InternoController(QObject):
             raise AudioApiError("No hay respuesta asociada al audio.")
         if self._audio_client is None:
             raise AudioApiError(
-                self._audio_client_error or "La API de audio no esta disponible en esta sesion."
+                self._audio_client_error or "La API de audio no está disponible en esta sesión."
             )
         return self._audio_client.ensure_audio_local(id_respuesta)
 

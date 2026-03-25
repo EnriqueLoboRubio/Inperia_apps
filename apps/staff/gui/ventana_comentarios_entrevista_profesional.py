@@ -183,7 +183,7 @@ class VentanaComentariosEntrevistaProfesional(QDialog):
         self._limpiar_layout_comentarios()
         filas = self._comentarios_visibles()
         if not filas:
-            lbl = QLabel("Todavia no hay comentarios.")
+            lbl = QLabel("Todavía no hay comentarios.")
             lbl.setStyleSheet("color: #666666; font-size: 10pt; border: none;")
             lbl.setAlignment(Qt.AlignCenter)
             self.layout_comentarios.addWidget(lbl)
@@ -284,7 +284,7 @@ class VentanaComentariosEntrevistaProfesional(QDialog):
     def _enviar_comentario(self):
         texto = self.txt_nuevo.toPlainText().strip()
         if not texto:
-            self._msg.mostrar_advertencia("Atencion", "Debe escribir un comentario.")
+            self._msg.mostrar_advertencia("Atención", "Debe escribir un comentario.")
             return
         ids_existentes = [
             int(c.get("id"))

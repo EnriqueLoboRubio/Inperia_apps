@@ -400,7 +400,7 @@ class PantallaListaInternosProfesional(QWidget):
         self._mensaje_estado = ""
         self._actualizar_lista()
 
-    def mostrar_error_carga(self, mensaje="Error al cargar los internos. Intenta de nuevo."):
+    def mostrar_error_carga(self, mensaje="Error al cargar los internos. Inténtelo de nuevo."):
         self._estado_lista = "error"
         self._mensaje_estado = mensaje
         self._datos_filtrados = []

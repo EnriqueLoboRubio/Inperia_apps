@@ -24,7 +24,7 @@ class LoginControllerStaff(QObject):
             self.signal_login_fallido.emit("Por favor, complete todos los campos.")
             return
         if not self.validar_formato_correo(correo):
-            self.signal_login_fallido.emit("Formato de correo invalido.")
+            self.signal_login_fallido.emit("Formato de correo inválido.")
             return
 
         datos_usuario = encontrar_usuario_por_email(correo)
@@ -40,11 +40,11 @@ class LoginControllerStaff(QObject):
             if self.intentos_fallidos >= 3:
                 eliminar_usuario(correo)
                 self.signal_login_fallido.emit(
-                    "CRITICO: Ha superado el numero maximo de intentos. La cuenta ha sido eliminada. Contacte con el administrador."
+                    "CRITICO: Ha superado el numero máximo de intentos. La cuenta ha sido eliminada. Contacte con el administrador."
                 )
                 return
             self.signal_login_fallido.emit(
-                f"Usuario o contrasena incorrectos. Le quedan {intentos_restantes} intentos."
+                f"Usuario o contraseña incorrectos. Le quedan {intentos_restantes} intentos."
             )
             return
 

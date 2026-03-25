@@ -379,7 +379,7 @@ class PantallaResumen(QWidget):
                 self.set_estado_analisis_pregunta(numero, "Sin analizar", en_progreso=False)
         self._actualizar_panel_global(entrevista, respuestas)
         self._actualizar_estado_guardado_profesional(respuestas)
-        self.set_estado_global_entrevista(getattr(entrevista, "estado_evaluacion_ia", "sin evaluacion"))
+        self.set_estado_global_entrevista(getattr(entrevista, "estado_evaluacion_ia", "Sin evaluación"))
         self._reaplicar_bloqueos_ia()
 
     def crear_tarjeta_pregunta(self, numero, titulo, pregunta):
