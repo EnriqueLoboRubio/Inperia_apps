@@ -150,7 +150,7 @@ class VentanaDetallePreguntaEdit(QDialog):
 
         self.boton_play = QPushButton()
         self.boton_play.setFocusPolicy(Qt.NoFocus)
-        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIcon(QIcon("assets:play.png"))
         self.boton_play.setIconSize(QSize(20, 20))
         self.boton_play.setFixedSize(50, 50)
         self.boton_play.setToolTip("Reproducir grabación")
@@ -160,7 +160,7 @@ class VentanaDetallePreguntaEdit(QDialog):
 
         self.boton_grabar = QPushButton()
         self.boton_grabar.setFocusPolicy(Qt.NoFocus)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(25, 25))
         self.boton_grabar.setFixedSize(50, 50)
         self.boton_grabar.setToolTip("Responder por voz")
@@ -227,14 +227,14 @@ class VentanaDetallePreguntaEdit(QDialog):
         self.boton_grabar.setProperty("grabando", False)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(25, 25))
         self.boton_grabar.setToolTip(
             "Responder por voz" if grabacion_disponible else "Cargando reconocimiento de voz..."
         )
 
         self.boton_play.setEnabled(True)
-        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIcon(QIcon("assets:play.png"))
         self.boton_play.setToolTip("Reproducir grabación")
 
         self.boton_cerrar.setEnabled(True)
@@ -280,7 +280,7 @@ class VentanaDetallePreguntaEdit(QDialog):
         self.boton_grabar.setProperty("grabando", False)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(25, 25))
         self.boton_grabar.setToolTip("Reintentar carga del reconocimiento de voz")
         self.lbl_estado_audio.setText(
@@ -302,7 +302,7 @@ class VentanaDetallePreguntaEdit(QDialog):
         self.boton_grabar.setProperty("grabando", True)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/pausa.png"))
+        self.boton_grabar.setIcon(QIcon("assets:pausa.png"))
         self.boton_grabar.setIconSize(QSize(20, 20))
 
         self.txt_respuesta.setReadOnly(True)
@@ -312,14 +312,14 @@ class VentanaDetallePreguntaEdit(QDialog):
         self.lbl_transcripcion_parcial.clear()
 
     def _aplicar_estado_reproduciendo(self):
-        self.boton_play.setIcon(QIcon("assets/pausa.png"))
+        self.boton_play.setIcon(QIcon("assets:pausa.png"))
         self.boton_grabar.setEnabled(False)
         self.boton_grabar.setToolTip("Desactivado: no puede grabar mientras se reproduce audio.")
         self.lbl_estado_audio.setText("Reproduciendo...")
         self.lbl_estado_audio.setStyleSheet("color: green; font-size: 12px;")
 
     def _aplicar_estado_pausado(self):
-        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIcon(QIcon("assets:play.png"))
         self.boton_grabar.setEnabled(True)
         self.boton_grabar.setToolTip("Responder por voz")
         self.lbl_estado_audio.setText("Pausado")
@@ -573,7 +573,7 @@ class VentanaDetallePreguntaEdit(QDialog):
         layout_cabecera = QHBoxLayout()
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(
+        pixmap = QPixmap("assets:error.png").scaled(
             30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         lbl_icono.setPixmap(pixmap)
@@ -670,3 +670,4 @@ class VentanaDetallePreguntaEdit(QDialog):
             self._finalizar_grabacion_ui(audio_listo=True)
             return
         super().keyPressEvent(event)
+

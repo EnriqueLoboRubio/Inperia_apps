@@ -28,7 +28,7 @@ class VentanaLoginStaff(QMainWindow):
 
     def setup_window(self):
         self.setWindowTitle("INPERIA STAFF")
-        self.setWindowIcon(QIcon("assets/inperia.ico"))
+        self.setWindowIcon(QIcon("assets:inperia.ico"))
         self.setMinimumSize(1200, 700)
         self.setWindowState(self.windowState() | Qt.WindowMaximized)
 
@@ -41,7 +41,7 @@ class VentanaLoginStaff(QMainWindow):
         central.setLayout(layout_principal)
 
         self.izq = QLabel()
-        self.izq.setPixmap(QPixmap("assets/inicio_profesional.jpg"))
+        self.izq.setPixmap(QPixmap("assets:inicio_profesional.jpg"))
         self.izq.setAlignment(Qt.AlignCenter)
         self.izq.setScaledContents(True)
         self.izq.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -100,7 +100,7 @@ class VentanaLoginStaff(QMainWindow):
         label_contrasena.setFixedWidth(500)
 
         logo_inperia = QLabel()
-        pixmap_logo = QPixmap("assets/inperiaNegro.png").scaled(
+        pixmap_logo = QPixmap("assets:inperiaNegro.png").scaled(
             220, 90, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         logo_inperia.setPixmap(pixmap_logo)
@@ -163,12 +163,12 @@ class VentanaLoginStaff(QMainWindow):
 
     def mostrar_mensaje_error(self, mensaje):
         if "CRITICO" in mensaje:
-            imagen = "assets/borrado.png"
+            imagen = "assets:borrado.png"
             tit = "Cuenta eliminada"
             self.input_correo.clear()
             self.input_contrasena.clear()
         else:
-            imagen = "assets/error.png"
+            imagen = "assets:error.png"
             tit = "Atención"
             if "existe" in mensaje:
                 self.input_correo.clear()
@@ -227,3 +227,4 @@ class VentanaLoginStaff(QMainWindow):
 
         layout_main.addWidget(fondo)
         dialogo.exec_()
+

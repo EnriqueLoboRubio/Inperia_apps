@@ -1,4 +1,4 @@
-import os
+﻿import os
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -7,6 +7,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_JUSTIFY
 from db.pregunta_db import obtener_preguntas_como_diccionario
+from utils.runtime_paths import shared_asset_path
 
 COMP_LABELS = [
     "Cumplir estrictamente con los horarios establecidos",
@@ -85,8 +86,7 @@ class DocumentoPDF:
 
     @staticmethod
     def logo_inperia():
-        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        return os.path.join(base, "assets", "inperiaNegro.png")
+        return str(shared_asset_path("inperiaNegro.png"))
 
     @staticmethod
     def dibujar_logo(c, x, y, tam=42):
@@ -524,3 +524,4 @@ class DocumentoPDF:
 
         # onFirstPage y onLaterPages dibujan el fondo gris general y los logos en cada página
         doc.build(story, onFirstPage=DocumentoPDF._on_page, onLaterPages=DocumentoPDF._on_page)
+

@@ -1,19 +1,19 @@
-# Inperia Apps
+﻿# Inperia Apps
 
-Esta carpeta es una separación de `Inperia` preparada para generar dos productos:
+Esta carpeta es una separacion de `Inperia` preparada para generar dos productos:
 
 - `Inperia Cliente`: acceso exclusivo para internos.
 - `Inperia Staff`: acceso para profesionales y administradores.
 
 ## Estructura
 
-- `apps/cliente`: entrypoint, login y capas específicas del producto cliente.
-- `apps/staff`: entrypoint, login y capas específicas del producto staff.
-- `shared`: db, modelos, servicios, utilidades y widgets reutilizados.
+- `apps/cliente`: entrypoint, login y capas especificas del producto cliente.
+- `apps/staff`: entrypoint, login y capas especificas del producto staff.
 - `apps/staff/ia`: logica de analisis IA usada por la app de staff.
+- `shared`: db, modelos, servicios, utilidades y widgets reutilizados.
 - `packaging/pyinstaller`: `.spec` para construir los ejecutables.
 - `packaging/installer`: scripts de Inno Setup para generar instaladores.
-- `scripts`: automatización de build e instalador.
+- `scripts`: automatizacion de build e instalador.
 
 ## Ejecucion en desarrollo
 
@@ -30,15 +30,19 @@ python apps/cliente/main.py
 python apps/staff/main.py
 ```
 
-## Requisitos de configuración
+## Requisitos de configuracion
 
-- Base de datos PostgreSQL accesible vía variables de entorno `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`.
-- API de audio configurada en `apps/cliente/config/config.json`, `apps/staff/config/config.json`, `shared/config.json` o la variable `INPERAUDIO_API_URL`.
-- Modelos locales de Vosk en `shared/utils/` para la transcripción.
+- Base de datos PostgreSQL accesible via variables de entorno `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`.
+- API de audio configurada en `apps/cliente/config/config.json`, `apps/staff/config/config.json`, `shared/config.json`, `%LOCALAPPDATA%\\Inperia Cliente\\config.json`, `%LOCALAPPDATA%\\Inperia Staff\\config.json` o la variable `INPERAUDIO_API_URL`.
+- Modelo local de Vosk en `shared/utils/vosk-es/big` para la transcripcion de `Inperia Cliente`.
+- Los datos mutables se guardan en `%LOCALAPPDATA%\\Inperia Cliente` y `%LOCALAPPDATA%\\Inperia Staff`.
 
 ## Build de ejecutables
 
 Los builds usan `PyInstaller` en modo `onedir`.
+
+- `Inperia Cliente` empaqueta `reportlab`, `vosk`, `PyAudio`, `sounddevice` y solo el modelo `big`.
+- `Inperia Staff` empaqueta `reportlab` y la IA de `apps/staff/ia`, sin Vosk.
 
 ```powershell
 ./scripts/build_cliente.ps1

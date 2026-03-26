@@ -311,8 +311,8 @@ class VentanaDetallePromptEditProfesional(QDialog):
             }
             QSpinBox::up-button { subcontrol-position: top right; }
             QSpinBox::down-button { subcontrol-position: bottom right; }
-            QSpinBox::up-arrow { image: url(assets/flecha_arriba.png); width: 10px; height: 10px; }
-            QSpinBox::down-arrow { image: url(assets/flecha_abajo.png); width: 10px; height: 10px; }
+            QSpinBox::up-arrow { image: url(assets:flecha_arriba.png); width: 10px; height: 10px; }
+            QSpinBox::down-arrow { image: url(assets:flecha_abajo.png); width: 10px; height: 10px; }
             """
         )
         self.input_cantidad_niveles.setFixedHeight(58)
@@ -336,7 +336,7 @@ class VentanaDetallePromptEditProfesional(QDialog):
     def _crear_boton_info_inline_en_plantilla(self):
         self.boton_info_pregunta = QPushButton(self.txt_plantilla.viewport())
         self.boton_info_pregunta.setFixedSize(32, 32)
-        self.boton_info_pregunta.setIcon(QIcon("assets/info.png"))
+        self.boton_info_pregunta.setIcon(QIcon("assets:info.png"))
         self.boton_info_pregunta.setIconSize(QSize(24, 24))
         self.boton_info_pregunta.setStyleSheet(
             """
@@ -582,7 +582,7 @@ class VentanaDetallePromptEditProfesional(QDialog):
 
         head = QHBoxLayout()
         icono = QLabel()
-        icono.setPixmap(QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        icono.setPixmap(QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         head.addWidget(icono)
         titulo = QLabel("Cerrar edición")
         titulo.setObjectName("TituloError")
@@ -642,3 +642,4 @@ class VentanaDetallePromptEditProfesional(QDialog):
             event.accept()
             return
         event.accept() if self.mostrar_confirmacion_cerrar() else event.ignore()
+

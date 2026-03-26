@@ -1,6 +1,5 @@
-﻿import ctypes
+import ctypes
 import sys
-from pathlib import Path
 
 from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, Qt
 from PyQt5.QtGui import QIcon, QPixmap
@@ -10,7 +9,7 @@ from controllers.interno_controller import InternoController
 from controllers.login_controller_cliente import LoginControllerCliente
 from db.data_seeding import ejecutar_data_seeding_inicial
 from gui.login import VentanaLoginCliente
-from utils.runtime_paths import vosk_model_root
+from utils.runtime_paths import shared_asset_path, vosk_model_root
 from utils.vosk_model_manager import obtener_gestor_modelo_vosk
 
 
@@ -36,16 +35,8 @@ class ClienteMainController:
         self.mostrar_splash_inicio()
 
     @staticmethod
-    def _runtime_root():
-        return (
-            Path(sys.executable).resolve().parent / "shared"
-            if getattr(sys, "frozen", False)
-            else Path(__file__).resolve().parents[3] / "shared"
-        )
-
-    @classmethod
-    def _asset_path(cls, filename):
-        return cls._runtime_root() / "assets" / filename
+    def _asset_path(filename):
+        return shared_asset_path(filename)
 
     def _iniciar_precarga_modelo_vosk(self):
         ruta_modelo_vosk = str(vosk_model_root("big"))
@@ -136,6 +127,3 @@ class ClienteMainController:
 
     def ejecutar(self):
         sys.exit(self.app.exec_())
-
-
-

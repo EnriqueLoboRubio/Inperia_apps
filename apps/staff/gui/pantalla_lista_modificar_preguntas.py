@@ -70,7 +70,7 @@ class PantallaListaModificarPreguntas(QWidget):
 
         boton_editar = QPushButton()
         boton_editar.setFixedSize(45, 45)
-        boton_editar.setIcon(QIcon("assets/editar.png"))
+        boton_editar.setIcon(QIcon("assets:editar.png"))
         boton_editar.setIconSize(QSize(25, 25))
         boton_editar.setCursor(Qt.PointingHandCursor)
         boton_editar.setStyleSheet(ESTILO_BOTON_TARJETA)
@@ -107,3 +107,4 @@ class PantallaListaModificarPreguntas(QWidget):
             texto = datos.get("texto", "")
             tarjeta = self.crear_tarjeta_pregunta(numero, numero, titulo, texto)
             self.scroll_content_layout.addWidget(tarjeta)
+

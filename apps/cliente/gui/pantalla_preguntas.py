@@ -49,7 +49,7 @@ class PantallaPreguntas(QWidget):
         self.boton_info = QPushButton()
         self.boton_info.setToolTip("Información sobre la pregunta")
         self.boton_info.setFixedSize(40, 40)
-        self.boton_info.setIcon(QIcon("assets/info.png"))
+        self.boton_info.setIcon(QIcon("assets:info.png"))
         self.boton_info.setIconSize(QSize(30, 30))
         self.boton_info.setStyleSheet(
             """
@@ -130,7 +130,7 @@ class PantallaPreguntas(QWidget):
         self.boton_grabar.setFocusPolicy(Qt.NoFocus)
         self.boton_grabar.setToolTip("Grabar respuesta")
         self.boton_grabar.setFixedSize(60, 60)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(30, 30))
         self.boton_grabar.setProperty("grabando", False)
         self.boton_grabar.setCursor(Qt.PointingHandCursor)
@@ -220,7 +220,7 @@ class PantallaPreguntas(QWidget):
         self.boton_grabar.setProperty("grabando", False)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(30, 30))
         self.boton_grabar.setToolTip("Reintentar carga del reconocimiento de voz")
         self.lbl_estado_audio.setText(
@@ -236,7 +236,7 @@ class PantallaPreguntas(QWidget):
         self.boton_grabar.setProperty("grabando", False)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/micro.png"))
+        self.boton_grabar.setIcon(QIcon("assets:micro.png"))
         self.boton_grabar.setIconSize(QSize(30, 30))
         self.boton_grabar.setToolTip(
             "Grabar respuesta" if grabacion_disponible else "Cargando reconocimiento de voz..."
@@ -268,7 +268,7 @@ class PantallaPreguntas(QWidget):
         self.boton_grabar.setProperty("grabando", True)
         self.boton_grabar.style().unpolish(self.boton_grabar)
         self.boton_grabar.style().polish(self.boton_grabar)
-        self.boton_grabar.setIcon(QIcon("assets/pausa.png"))
+        self.boton_grabar.setIcon(QIcon("assets:pausa.png"))
         self.boton_grabar.setIconSize(QSize(20, 20))
 
         self.txt_respuesta.setReadOnly(True)
@@ -522,7 +522,7 @@ class PantallaPreguntas(QWidget):
         layout_cabecera.setSpacing(10)
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        pixmap = QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         lbl_icono.setPixmap(pixmap)
         lbl_icono.setFixedSize(30, 30)
         lbl_icono.setStyleSheet("background: transparent; border: none;")
@@ -577,3 +577,4 @@ class PantallaPreguntas(QWidget):
                 self._finalizar_grabacion_ui(audio_listo=True)
             return
         super().keyPressEvent(event)
+

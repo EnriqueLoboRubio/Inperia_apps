@@ -155,7 +155,7 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
 
         layout_cabecera = QHBoxLayout()
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        pixmap = QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         lbl_icono.setPixmap(pixmap)
 
         titulo = QLabel("Cerrar edición")
@@ -236,3 +236,4 @@ class VentanaDetallePreguntaEditProfesional(QDialog):
             event.accept()
         else:
             event.ignore()
+

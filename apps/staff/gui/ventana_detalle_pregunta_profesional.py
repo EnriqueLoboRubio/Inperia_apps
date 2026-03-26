@@ -272,7 +272,7 @@ class VentanaDetallePreguntaProfesional(QDialog):
         controles = QHBoxLayout()
         controles.setAlignment(Qt.AlignCenter)
         self.boton_play = QPushButton()
-        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIcon(QIcon("assets:play.png"))
         self.boton_play.setIconSize(QSize(20, 20))
         self.boton_play.setFixedSize(50, 50)
         self.boton_play.setCursor(Qt.PointingHandCursor)
@@ -392,7 +392,7 @@ class VentanaDetallePreguntaProfesional(QDialog):
             self.boton_enviar_comentario = QPushButton("Enviar")
             self.boton_enviar_comentario.setCursor(Qt.PointingHandCursor)
             self.boton_enviar_comentario.setStyleSheet(ESTILO_BOTON_SIG_ATR)
-            self.boton_enviar_comentario.setIcon(QIcon("assets/enviar.svg"))
+            self.boton_enviar_comentario.setIcon(QIcon("assets:enviar.svg"))
             self.boton_enviar_comentario.setIconSize(QSize(16, 16))
             self.boton_enviar_comentario.setFixedSize(124, 40)
             self.boton_enviar_comentario.clicked.connect(self._enviar_comentario)
@@ -502,7 +502,7 @@ class VentanaDetallePreguntaProfesional(QDialog):
 
         boton_borrar = QPushButton("Borrar")
         boton_borrar.setCursor(Qt.PointingHandCursor)
-        boton_borrar.setIcon(QIcon("assets/borrar.svg"))
+        boton_borrar.setIcon(QIcon("assets:borrar.svg"))
         boton_borrar.setIconSize(QSize(14, 14))
         boton_borrar.setFixedHeight(26)
         boton_borrar.setStyleSheet(
@@ -606,12 +606,12 @@ class VentanaDetallePreguntaProfesional(QDialog):
 
     def cambio_estado(self, estado):
         if estado == QMediaPlayer.PlayingState:
-            self.boton_play.setIcon(QIcon("assets/pausa.png"))
+            self.boton_play.setIcon(QIcon("assets:pausa.png"))
             self.boton_play.setIconSize(QSize(15, 15))
             self.lbl_estado_audio.setText("Reproduciendo...")
             self.lbl_estado_audio.setStyleSheet("color: green; border: none;")
         else:
-            self.boton_play.setIcon(QIcon("assets/play.png"))
+            self.boton_play.setIcon(QIcon("assets:play.png"))
             self.boton_play.setIconSize(QSize(20, 20))
             self.lbl_estado_audio.setText("")
 
@@ -670,3 +670,4 @@ class VentanaDetallePreguntaProfesional(QDialog):
 
 # Compatibilidad con imports antiguos.
 VentanaDetallePregunta = VentanaDetallePreguntaProfesional
+

@@ -122,7 +122,7 @@ class PantallaResumen(QWidget):
         boton_layout = QHBoxLayout()
         boton_layout.addStretch() #icono a la derecha
                
-        icono_editar = QIcon("assets/editar.png")
+        icono_editar = QIcon("assets:editar.png")
 
         boton_editar = QPushButton()
         boton_editar.setFixedSize(45, 45)
@@ -166,3 +166,4 @@ class PantallaResumen(QWidget):
             tarjeta = self.crear_tarjeta_pregunta(i, titulo, texto_respuesta)
 
             self.scroll_content_layout.addWidget(tarjeta)
+

@@ -1,10 +1,10 @@
 import json
-from pathlib import Path
 
 from db.conexion import obtener_conexion
+from utils.runtime_paths import shared_data_file
 
 
-RUTA_PREGUNTAS_JSON = Path(__file__).resolve().parent.parent / "data" / "preguntas.json"
+RUTA_PREGUNTAS_JSON = shared_data_file("preguntas.json")
 
 def _cargar_preguntas_desde_json(ruta_json=RUTA_PREGUNTAS_JSON):
     with open(ruta_json, "r", encoding="utf-8") as archivo:

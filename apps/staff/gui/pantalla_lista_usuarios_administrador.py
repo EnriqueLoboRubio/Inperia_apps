@@ -109,7 +109,7 @@ class TarjetaUsuarioAdministrador(QFrame):
         boton_editar = QPushButton()
         boton_editar.setCursor(Qt.PointingHandCursor)
         boton_editar.setFixedSize(45, 45)
-        boton_editar.setIcon(QIcon("assets/editar.png"))
+        boton_editar.setIcon(QIcon("assets:editar.png"))
         boton_editar.setIconSize(QSize(25, 25))
         boton_editar.setStyleSheet(ESTILO_BOTON_TARJETA)
         boton_editar.setToolTip("Editar usuario")
@@ -221,7 +221,7 @@ class PantallaListaUsuariosAdministrador(QWidget):
             """
         )
         tam_icono = self.input_busqueda.fontMetrics().height() + 3
-        icono_busqueda_svg = QIcon("assets/buscar.svg")
+        icono_busqueda_svg = QIcon("assets:buscar.svg")
         icono_busqueda = QIcon(icono_busqueda_svg.pixmap(tam_icono, tam_icono))
         self.input_busqueda.addAction(icono_busqueda, QLineEdit.LeadingPosition)
         self.input_busqueda.textChanged.connect(self.filtros_cambiados.emit)
@@ -319,3 +319,4 @@ class PantallaListaUsuariosAdministrador(QWidget):
             self.layout_lista.addWidget(lbl_mas)
 
         self.layout_lista.addStretch()
+

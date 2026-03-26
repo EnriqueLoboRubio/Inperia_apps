@@ -56,7 +56,7 @@ class Mensajes:
         layout_cabecera.setSpacing(10)
         
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        pixmap = QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
         lbl_icono.setPixmap(pixmap) 
         lbl_icono.setFixedSize(30, 30)
         lbl_icono.setStyleSheet("background: transparent; border: none;")
@@ -131,7 +131,7 @@ class Mensajes:
         layout_cabecera.setSpacing(10)
         
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/info.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        pixmap = QPixmap("assets:info.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
         lbl_icono.setPixmap(pixmap) 
         lbl_icono.setFixedSize(30, 30)
         lbl_icono.setStyleSheet("background: transparent; border: none;")
@@ -204,7 +204,7 @@ class Mensajes:
         layout_cabecera = QHBoxLayout()
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/info.png").scaled(
+        pixmap = QPixmap("assets:info.png").scaled(
             30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         lbl_icono.setPixmap(pixmap)
@@ -293,7 +293,7 @@ class Mensajes:
         layout_cabecera = QHBoxLayout()
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/info.png").scaled(
+        pixmap = QPixmap("assets:info.png").scaled(
             30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         lbl_icono.setPixmap(pixmap)
@@ -378,12 +378,12 @@ class Mensajes:
     
     def mostrar_mensaje_error_login(self, mensaje):
         if "CRITICO" in mensaje:        
-            imagen = "assets/borrado.png"
+            imagen = "assets:borrado.png"
             tit = "Cuenta eliminada"
             self.input_correo.clear()
             self.input_contraseña.clear()
         else:            
-            imagen = "assets/error.png"
+            imagen = "assets:error.png"
             tit = "Atención"
             if "existe" in mensaje:
                 self.input_correo.clear()
@@ -481,7 +481,7 @@ class Mensajes:
         # Icono
         icono = QLabel()
         try:
-            pixmap = QPixmap("assets/info.png").scaled(48, 48, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            pixmap = QPixmap("assets:info.png").scaled(48, 48, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             icono.setPixmap(pixmap)
         except:
             icono.setText("ℹ️")
@@ -580,3 +580,4 @@ class Mensajes:
         resultado = dialogo.exec_()
         
         return resultado == QDialog.Accepted
+

@@ -4,19 +4,18 @@ from pathlib import Path
 
 
 def _bootstrap():
+    os.environ["INPERIA_APP_ID"] = "cliente"
     app_root = Path(__file__).resolve().parent
     project_root = app_root.parent.parent
-    runtime_root = (
-        Path(sys.executable).resolve().parent / "shared"
-        if getattr(sys, "frozen", False)
-        else project_root / "shared"
-    )
 
     for path in (str(project_root), str(project_root / "shared"), str(app_root)):
         if path not in sys.path:
             sys.path.insert(0, path)
 
-    os.chdir(runtime_root)
+    from utils.runtime_paths import ensure_runtime_directories, init_qt_search_paths
+
+    ensure_runtime_directories()
+    init_qt_search_paths()
 
 
 _bootstrap()

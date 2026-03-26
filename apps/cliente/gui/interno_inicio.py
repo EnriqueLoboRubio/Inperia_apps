@@ -49,7 +49,7 @@ class VentanaInterno(QMainWindow):
         if app is not None and not app.windowIcon().isNull():
             self.setWindowIcon(app.windowIcon())
         else:
-            self.setWindowIcon(QIcon("assets/inperia.ico"))
+            self.setWindowIcon(QIcon("assets:inperia.ico"))
         self.setMinimumSize(1200,700)
         self.setWindowState(self.windowState() | Qt.WindowMaximized)
 
@@ -193,7 +193,7 @@ class VentanaInterno(QMainWindow):
         self.boton_ajustes = QPushButton() 
         self.boton_ajustes.setToolTip("Ver ajustes")
         self.boton_ajustes.setFixedSize(50,50) 
-        self.boton_ajustes.setIcon(QIcon("assets/ajustes.png")) 
+        self.boton_ajustes.setIcon(QIcon("assets:ajustes.png")) 
         self.boton_ajustes.setIconSize(QSize(40,40))
         self.boton_ajustes.setStyleSheet("""
             QPushButton { 
@@ -218,7 +218,7 @@ class VentanaInterno(QMainWindow):
         self.boton_usuario = QPushButton()
         self.boton_usuario.setToolTip("Perfil de usuario")
         self.boton_usuario.setFixedSize(50, 50)
-        self.boton_usuario.setIcon(QIcon("assets/interno.png"))
+        self.boton_usuario.setIcon(QIcon("assets:interno.png"))
         self.boton_usuario.setIconSize(QSize(40, 40))
         self.boton_usuario.setStyleSheet("""
             QPushButton { 
@@ -561,7 +561,7 @@ class VentanaInterno(QMainWindow):
         layout_cabecera.setSpacing(10)
         
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        pixmap = QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
         lbl_icono.setPixmap(pixmap) 
         lbl_icono.setFixedSize(30, 30)
         lbl_icono.setStyleSheet("background: transparent; border: none;")
@@ -641,7 +641,7 @@ class VentanaInterno(QMainWindow):
         layout_cabecera = QHBoxLayout()
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(
+        pixmap = QPixmap("assets:error.png").scaled(
             30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         lbl_icono.setPixmap(pixmap)
@@ -711,3 +711,4 @@ class VentanaInterno(QMainWindow):
         # --- EJECUCIÓN ---
         resultado = dialogo.exec_()
         return resultado == QDialog.Accepted
+

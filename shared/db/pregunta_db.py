@@ -1,7 +1,7 @@
 import json
-from pathlib import Path
 
 from db.conexion import obtener_conexion
+from utils.runtime_paths import shared_data_file
 
 
 def crear_pregunta():
@@ -75,7 +75,7 @@ def obtener_preguntas_como_diccionario():
 
 def cargar_preguntas_desde_json(ruta_json=None):
     if ruta_json is None:
-        ruta_json = Path(__file__).resolve().parent.parent / "data" / "preguntas.json"
+        ruta_json = shared_data_file("preguntas.json")
 
     try:
         with open(ruta_json, "r", encoding="utf-8") as f:

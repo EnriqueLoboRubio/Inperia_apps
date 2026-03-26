@@ -164,7 +164,7 @@ class TarjetaInternoAsignado(QFrame):
             0, 1, alignment=Qt.AlignTop | Qt.AlignLeft
         )
         fila_detalles.addLayout(
-            self._crear_bloque_con_icono("Ingreso", self._fmt_fecha(getattr(self.interno, "fecha_ingreso", "-")), "assets/calendario.png"),
+            self._crear_bloque_con_icono("Ingreso", self._fmt_fecha(getattr(self.interno, "fecha_ingreso", "-")), "assets:calendario.png"),
             0, 2, alignment=Qt.AlignTop | Qt.AlignLeft
         )
 
@@ -178,7 +178,7 @@ class TarjetaInternoAsignado(QFrame):
             self._crear_bloque_con_icono(
                 "Última entrevista",
                 ultima_entrevista,
-                "assets/reloj.png",
+                "assets:reloj.png",
                 extra=puntuacion_txt,
             ),
             0, 3, alignment=Qt.AlignTop | Qt.AlignLeft
@@ -346,7 +346,7 @@ class PantallaListaInternosProfesional(QWidget):
             """
         )
         tam_icono = self.input_busqueda.fontMetrics().height() + 3
-        icono_busqueda_svg = QIcon("assets/buscar.svg")
+        icono_busqueda_svg = QIcon("assets:buscar.svg")
         icono_busqueda = QIcon(icono_busqueda_svg.pixmap(tam_icono, tam_icono))
         self.input_busqueda.addAction(icono_busqueda, QLineEdit.LeadingPosition)
         self.input_busqueda.textChanged.connect(self._actualizar_lista)
@@ -358,7 +358,7 @@ class PantallaListaInternosProfesional(QWidget):
         self.boton_filtros.setEnabled(False)
         self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aún no está disponible.")
         tam_icono_filtros = self.boton_filtros.fontMetrics().height() + 3
-        self.boton_filtros.setIcon(QIcon("assets/filtros.png"))
+        self.boton_filtros.setIcon(QIcon("assets:filtros.png"))
         self.boton_filtros.setIconSize(QSize(tam_icono_filtros, tam_icono_filtros))
         self.boton_filtros.setStyleSheet(
             """
@@ -491,6 +491,7 @@ class PantallaListaInternosProfesional(QWidget):
         lbl_vacio.setStyleSheet("font-size: 12pt; color: #7A7A7A;")
         self.layout_lista.addWidget(lbl_vacio)
         self.layout_lista.addStretch()
+
 
 
 

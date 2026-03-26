@@ -1,4 +1,4 @@
-﻿# gui/estilos.py
+# gui/estilos.py
 
 from unicodedata import normalize
 
@@ -94,7 +94,7 @@ ESTILO_INPUT = f"""
     /* --- DATE --- */
     QDateEdit {{
             padding-left: 45px;
-            background-image: url(assets/calendario.png); 
+            background-image: url(assets:calendario.png); 
             background-repeat: no-repeat;
             background-position: left 15px center;
         }}
@@ -109,7 +109,7 @@ ESTILO_INPUT = f"""
 
     /* Flecha abajo */
     QDateEdit::down-arrow {{
-        image: url(assets/flecha_abajo.png);
+        image: url(assets:flecha_abajo.png);
         width: 18px;
         height: 18px;
     }}  
@@ -133,7 +133,7 @@ ESTILO_INPUT = f"""
     }}
 
     QComboBox::down-arrow {{
-        image: url(assets/flecha_abajo.png);
+        image: url(assets:flecha_abajo.png);
         width: 18px;
         height: 18px;
     }}
@@ -150,13 +150,13 @@ ESTILO_INPUT = f"""
         border-radius: 8px;
     }}
 
-    /* Barra superior (Mes y AÃ±o) */
+    /* Barra superior (Mes y Año) */
     QCalendarWidget QWidget#qt_calendar_navigationbar {{
         background-color: white;
         border-bottom: 1px solid #E0E0E0;
     }}
 
-    /* Botones de navegaciÃ³n (flechas mes anterior/siguiente) */
+    /* Botones de navegación (flechas mes anterior/siguiente) */
     QCalendarWidget QToolButton {{
         color: #333333;
         background-color: transparent;
@@ -174,7 +174,7 @@ ESTILO_INPUT = f"""
         border-radius: 6px;
     }}
 
-    /* MenÃº desplegable de meses */
+    /* Menú desplegable de meses */
     QCalendarWidget QMenu {{
         background-color: white;
         border: 1px solid #DDD;
@@ -185,16 +185,16 @@ ESTILO_INPUT = f"""
     }}    
 
 
-    /* Vista de los dÃ­as */
+    /* Vista de los días */
     QCalendarWidget QAbstractItemView:enabled {{
-        color: #333333; /* NÃºmeros de dÃ­as en gris oscuro */
+        color: #333333; /* Números de días en gris oscuro */
         background-color: white;
         selection-background-color: {COLOR_AZUL_OSCURO};
         selection-color: white;
         outline: 0;
     }}
 
-    /* DÃ­as de la semana (lu, ma, mi...) */
+    /* Días de la semana (lu, ma, mi...) */
     QCalendarWidget QWidget {{ 
         alternate-background-color: #F7F7F7; 
     }}
@@ -205,12 +205,12 @@ ESTILO_INPUT = f"""
 
     QTimeEdit {{
             padding-left: 45px;
-            background-image: url(assets/reloj.png); 
+            background-image: url(assets:reloj.png); 
             background-repeat: no-repeat;
             background-position: left 15px center;
         }}    
 
-    /* Contenedor de botones â†‘ â†“ */
+    /* Contenedor de botones ↑ ↓ */
     QTimeEdit::up-button,
     QTimeEdit::down-button {{
         subcontrol-origin: border;
@@ -222,19 +222,19 @@ ESTILO_INPUT = f"""
 
     /* Flecha arriba */
     QTimeEdit::up-arrow {{
-        image: url(assets/flecha_arriba.png);
+        image: url(assets:flecha_arriba.png);
         width: 20px;
         height: 20px;
     }}
 
     /* Flecha abajo */
     QTimeEdit::down-arrow {{
-        image: url(assets/flecha_abajo.png);
+        image: url(assets:flecha_abajo.png);
         width: 20px;
         height: 20px;
     }}    
 
-    /* BotÃ³n de Arriba */
+    /* Botón de Arriba */
     QTimeEdit::up-button {{
         subcontrol-origin: border;
         subcontrol-position: top right; 
@@ -246,7 +246,7 @@ ESTILO_INPUT = f"""
         margin-top: 2px;
     }}
 
-    /* BotÃ³n de Abajo */
+    /* Botón de Abajo */
     QTimeEdit::down-button {{
         subcontrol-origin: border;
         subcontrol-position: bottom right; 
@@ -259,13 +259,13 @@ ESTILO_INPUT = f"""
     }}
 
     QTimeEdit::up-arrow {{
-        image: url(assets/flecha_arriba.png);
+        image: url(assets:flecha_arriba.png);
         width: 16px;
         height: 16px;
     }}
 
     QTimeEdit::down-arrow {{
-        image: url(assets/flecha_abajo.png);
+        image: url(assets:flecha_abajo.png);
         width: 16px;
         height: 16px;
     }}
@@ -294,7 +294,7 @@ ESTILO_COMBOBOX = """
         background: transparent;
     }
     QComboBox::down-arrow {
-        image: url(assets/flecha_abajo.png);
+        image: url(assets:flecha_abajo.png);
         width: 14px;
         height: 14px;
     }
@@ -643,15 +643,15 @@ ESTADOS_ENTREVISTA_IA_COLOR = {
     "preparando": ("Preparando", ESTADOS_PREGUNTA_IA_COLOR["analizando"]),
     "error": ("Error", ESTADOS_PREGUNTA_IA_COLOR["error"]),
     "evaluada": ("Analizada", ESTADOS_PREGUNTA_IA_COLOR["analizada"]),
-    "sin evaluaciÃ³n": ("Sin analizar", "#EFE6F8"),
+    "sin evaluación": ("Sin analizar", "#EFE6F8"),
     "sin evaluacion": ("Sin analizar", ESTADOS_PREGUNTA_IA_COLOR["sin_analizar"]),
     "evaluando": ("Analizando", ESTADOS_PREGUNTA_IA_COLOR["analizando"]),
     "analizando": ("Analizando", ESTADOS_PREGUNTA_IA_COLOR["analizando"]),
     "en cola...": ("En cola", ESTADOS_PREGUNTA_IA_COLOR["analizando"]),
     "preparando analisis...": ("Preparando", ESTADOS_PREGUNTA_IA_COLOR["analizando"]),
-    "anÃ¡lisis completado.": ("Analizada", "#D9C4F1"),
+    "análisis completado.": ("Analizada", "#D9C4F1"),
     "analisis completado.": ("Analizada", ESTADOS_PREGUNTA_IA_COLOR["analizada"]),
-    "error en el anÃ¡lisis.": ("Error", "#F2C1C1"),
+    "error en el análisis.": ("Error", "#F2C1C1"),
     "error en el analisis.": ("Error", ESTADOS_PREGUNTA_IA_COLOR["error"]),
 }
 
@@ -831,6 +831,7 @@ ESTILO_DIALOGO_ERROR = """
 ESTILO_NOMBRE_INTERNO = "color: black; font-size: 20px; font-weight: bold;"
 
 ESTILO_NUM_RC = "color: #666666; font-size: 11pt;"
+
 
 
 

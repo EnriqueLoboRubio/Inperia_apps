@@ -28,7 +28,7 @@ class VentanaLoginCliente(QMainWindow):
 
     def setup_window(self):
         self.setWindowTitle("INPERIA CLIENTE")
-        self.setWindowIcon(QIcon("assets/inperia.ico"))
+        self.setWindowIcon(QIcon("assets:inperia.ico"))
         self.setMinimumSize(1200, 700)
         self.setWindowState(self.windowState() | Qt.WindowMaximized)
 
@@ -41,7 +41,7 @@ class VentanaLoginCliente(QMainWindow):
         central.setLayout(layout_principal)
 
         self.izq = QLabel()
-        self.izq.setPixmap(QPixmap("assets/inicio_interno.jpg"))
+        self.izq.setPixmap(QPixmap("assets:inicio_interno.jpg"))
         self.izq.setAlignment(Qt.AlignCenter)
         self.izq.setScaledContents(True)
         self.izq.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -89,7 +89,7 @@ class VentanaLoginCliente(QMainWindow):
         badge_layout.setAlignment(Qt.AlignCenter)
 
         icono = QLabel()
-        icono.setPixmap(QPixmap("assets/interno.png").scaled(42, 42, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        icono.setPixmap(QPixmap("assets:interno.png").scaled(42, 42, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         icono.setAlignment(Qt.AlignCenter)
         badge_layout.addWidget(icono)
 
@@ -121,7 +121,7 @@ class VentanaLoginCliente(QMainWindow):
         label_contrasena.setFixedWidth(500)
 
         logo_inperia = QLabel()
-        pixmap_logo = QPixmap("assets/inperiaNegro.png").scaled(
+        pixmap_logo = QPixmap("assets:inperiaNegro.png").scaled(
             220, 90, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         logo_inperia.setPixmap(pixmap_logo)
@@ -184,12 +184,12 @@ class VentanaLoginCliente(QMainWindow):
 
     def mostrar_mensaje_error(self, mensaje):
         if "CRITICO" in mensaje:
-            imagen = "assets/borrado.png"
+            imagen = "assets:borrado.png"
             tit = "Cuenta eliminada"
             self.input_correo.clear()
             self.input_contrasena.clear()
         else:
-            imagen = "assets/error.png"
+            imagen = "assets:error.png"
             tit = "Atención"
             if "existe" in mensaje:
                 self.input_correo.clear()
@@ -248,3 +248,4 @@ class VentanaLoginCliente(QMainWindow):
 
         layout_main.addWidget(fondo)
         dialogo.exec_()
+

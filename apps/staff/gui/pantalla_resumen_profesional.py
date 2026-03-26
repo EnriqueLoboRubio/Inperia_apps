@@ -500,7 +500,7 @@ class PantallaResumen(QWidget):
         boton_layout.setSpacing(8)
         boton_layout.addStretch()
 
-        icono_ia = QIcon("assets/ia.png")
+        icono_ia = QIcon("assets:ia.png")
         spinner_ia = None
         spinner_host = None
         boton_ia = None
@@ -532,7 +532,7 @@ class PantallaResumen(QWidget):
             self.grupo_botones_ia.addButton(boton_ia, numero)
             boton_layout.addWidget(boton_ia)
 
-        icono_entrar = QIcon("assets/entrar.png")
+        icono_entrar = QIcon("assets:entrar.png")
         boton_entrar = QPushButton()
         boton_entrar.setFixedSize(45, 45)
         boton_entrar.setIcon(icono_entrar)
@@ -873,3 +873,4 @@ class PantallaResumen(QWidget):
 
         color_bg = COLOR_RIESGO["Riesgo maximo"]
         return "Riesgo maximo", "100 %", color_bg, color_texto_contraste(color_bg)
+

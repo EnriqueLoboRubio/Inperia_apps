@@ -131,7 +131,7 @@ class VentanaDetallePregunta(QDialog):
         time_layout.addWidget(self.lbl_tiempo_total)
 
         self.boton_play = QPushButton()
-        self.boton_play.setIcon(QIcon("assets/play.png"))
+        self.boton_play.setIcon(QIcon("assets:play.png"))
         self.boton_play.setIconSize(QSize(20, 20))
         self.boton_play.setFixedSize(30, 30)
         self.boton_play.setCursor(Qt.PointingHandCursor)
@@ -215,12 +215,12 @@ class VentanaDetallePregunta(QDialog):
 
     def cambio_estado(self, estado):
         if estado == QMediaPlayer.PlayingState:
-            self.boton_play.setIcon(QIcon("assets/pausa.png"))
+            self.boton_play.setIcon(QIcon("assets:pausa.png"))
             self.boton_play.setIconSize(QSize(15, 15))
             self.lbl_estado_audio.setText("Reproduciendo...")
             self.lbl_estado_audio.setStyleSheet("color: green;")
         else:
-            self.boton_play.setIcon(QIcon("assets/play.png"))
+            self.boton_play.setIcon(QIcon("assets:play.png"))
             self.boton_play.setIconSize(QSize(20, 20))
             self.lbl_estado_audio.setText("")
 
@@ -237,3 +237,4 @@ class VentanaDetallePregunta(QDialog):
         minutos = segundos // 60
         segundos = segundos % 60
         return f"{minutos:02}:{segundos:02}"
+

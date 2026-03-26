@@ -88,7 +88,7 @@ class VentanaUsuarioAdministrador(QDialog):
             self.boton_borrar.setFont(QFont("Arial", 10, QFont.Bold))
             self.boton_borrar.setCursor(Qt.PointingHandCursor)
             self.boton_borrar.setFixedHeight(38)
-            self.boton_borrar.setIcon(QIcon("assets/borrar.svg"))
+            self.boton_borrar.setIcon(QIcon("assets:borrar.svg"))
             self.boton_borrar.setIconSize(QSize(16, 16))
             self.boton_borrar.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
             self.boton_borrar.setStyleSheet(
@@ -378,7 +378,7 @@ class VentanaUsuarioAdministrador(QDialog):
                 background: transparent;
             }
             QDateEdit#dateEditAdmin::down-arrow {
-                image: url(assets/flecha_abajo.png);
+                image: url(assets:flecha_abajo.png);
                 width: 12px;
                 height: 12px;
             }
@@ -553,3 +553,4 @@ class VentanaUsuarioAdministrador(QDialog):
             "relacion_contacto_emergencia": self.combo_relacion_contacto.currentText().strip(),
             "numero_contacto_emergencia": self.input_numero_contacto.text().strip(),
         }
+

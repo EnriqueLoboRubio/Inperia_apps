@@ -111,7 +111,7 @@ class TarjetaSolicitud(QFrame):
 
         icono_reloj = QLabel()
         tam_icono = lbl_num_rc.fontMetrics().height()
-        imagen = QPixmap("assets/reloj.png").scaled(
+        imagen = QPixmap("assets:reloj.png").scaled(
             tam_icono, tam_icono, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         icono_reloj.setPixmap(imagen)
@@ -335,7 +335,7 @@ class PantallaListaSolicitud(QWidget):
             """
         )
         tam_icono_busqueda = self.input_busqueda.fontMetrics().height() + 3
-        icono_busqueda_svg = QIcon("assets/buscar.svg")
+        icono_busqueda_svg = QIcon("assets:buscar.svg")
         icono_busqueda = QIcon(icono_busqueda_svg.pixmap(tam_icono_busqueda, tam_icono_busqueda))
         self.input_busqueda.addAction(icono_busqueda, QLineEdit.LeadingPosition)
         self.input_busqueda.textChanged.connect(self._al_cambiar_texto_busqueda)
@@ -346,7 +346,7 @@ class PantallaListaSolicitud(QWidget):
         self.boton_filtros.setEnabled(False)
         self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aún no está disponible.")
         tam_icono_filtros = self.boton_filtros.fontMetrics().height() + 3
-        self.boton_filtros.setIcon(QIcon("assets/filtros.png"))
+        self.boton_filtros.setIcon(QIcon("assets:filtros.png"))
         self.boton_filtros.setIconSize(QSize(tam_icono_filtros, tam_icono_filtros))
         self.boton_filtros.setStyleSheet(
             """
@@ -599,3 +599,4 @@ class PantallaListaSolicitud(QWidget):
             "top_activo": self._top_activo,
             "modo_historial": self._modo_historial,
         }
+

@@ -64,7 +64,7 @@ class VentanaAcercaInperia(QDialog):
         layout.addLayout(fila_top)
 
         logo = QLabel()
-        pixmap = QPixmap("assets/inperiaNegro.png").scaled(88, 88, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        pixmap = QPixmap("assets:inperiaNegro.png").scaled(88, 88, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         logo.setPixmap(pixmap)
         logo.setAlignment(Qt.AlignCenter)
         layout.addWidget(logo, alignment=Qt.AlignCenter)
@@ -115,3 +115,4 @@ class VentanaAcercaInperia(QDialog):
         pie.setAlignment(Qt.AlignCenter)
         pie.setStyleSheet("font-size: 9.5pt; color: #3A3A3A;")
         layout.addWidget(pie)
+

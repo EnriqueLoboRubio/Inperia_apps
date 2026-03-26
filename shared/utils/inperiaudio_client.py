@@ -1,12 +1,13 @@
 import json
 import mimetypes
 import os
-import socket
 import shutil
-import sys
+import socket
 from pathlib import Path
 from urllib import error, parse, request
 from uuid import uuid4
+
+from utils.runtime_paths import app_config_candidates, audio_cache_root
 
 
 class AudioApiError(RuntimeError):
@@ -19,7 +20,7 @@ class InperiaAudioClient:
         self.timeout = int(timeout)
         self._token = None
         self._audio_paths = {}
-        self.cache_dir = self._runtime_root() / "data" / "audios_cache" / str(session_key)
+        self.cache_dir = audio_cache_root() / str(session_key)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.login(email, password)
 
@@ -36,7 +37,7 @@ class InperiaAudioClient:
         )
         token = str(data.get("access_token") or "").strip()
         if not token:
-            raise AudioApiError("La API de audio no devolvió un token válido.")
+            raise AudioApiError("La API de audio no devolvio un token valido.")
         self._token = token
 
     def get_audio_info(self, respuesta_id):
@@ -64,7 +65,7 @@ class InperiaAudioClient:
     def upload_audio(self, respuesta_id, file_path):
         file_path = Path(file_path)
         if not file_path.exists():
-            raise AudioApiError(f"No se encontró el archivo de audio local: {file_path}")
+            raise AudioApiError(f"No se encontro el archivo de audio local: {file_path}")
 
         boundary = f"----InperiaAudioBoundary{uuid4().hex}"
         mime_type = mimetypes.guess_type(str(file_path))[0] or "application/octet-stream"
@@ -93,7 +94,7 @@ class InperiaAudioClient:
         try:
             return json.loads(body)
         except json.JSONDecodeError as exc:
-            raise AudioApiError("La API de audio devolvió una respuesta JSON inválida.") from exc
+            raise AudioApiError("La API de audio devolvio una respuesta JSON invalida.") from exc
 
     def _download(self, endpoint, destino):
         destino.parent.mkdir(parents=True, exist_ok=True)
@@ -108,7 +109,7 @@ class InperiaAudioClient:
         req_headers = dict(headers or {})
         if use_auth:
             if not self._token:
-                raise AudioApiError("No hay sesión autenticada en la API de audio.")
+                raise AudioApiError("No hay sesion autenticada en la API de audio.")
             req_headers["Authorization"] = f"Bearer {self._token}"
 
         req = request.Request(f"{self.base_url}{endpoint}", data=data, headers=req_headers)
@@ -119,15 +120,15 @@ class InperiaAudioClient:
             raise AudioApiError(detalle) from exc
         except TimeoutError as exc:
             raise AudioApiError(
-                "La API de audio ha tardado demasiado en responder. Intente de nuevo más tarde."
+                "La API de audio ha tardado demasiado en responder. Intente de nuevo mas tarde."
             ) from exc
         except socket.timeout as exc:
             raise AudioApiError(
-                "La API de audio ha tardado demasiado en responder. Intente de nuevo más tarde."
+                "La API de audio ha tardado demasiado en responder. Intente de nuevo mas tarde."
             ) from exc
         except error.URLError as exc:
             raise AudioApiError(
-                "No se pudo conectar con la API de audio. Verifique URL, puerto y que el servicio esté iniciado."
+                "No se pudo conectar con la API de audio. Verifique URL, puerto y que el servicio este iniciado."
             ) from exc
 
     @staticmethod
@@ -169,11 +170,10 @@ class InperiaAudioClient:
         if explicit_base_url:
             return str(explicit_base_url).rstrip("/")
 
-        for config_path in (
-            Path.cwd() / "config.json",
-            Path.cwd() / "shared" / "config.json",
-            Path(__file__).resolve().parent.parent / "config.json",
-        ):
+        for config_path in app_config_candidates():
+            if config_path is None:
+                continue
+            config_path = Path(config_path)
             if not config_path.exists():
                 continue
             try:
@@ -185,9 +185,3 @@ class InperiaAudioClient:
                 pass
 
         return str(os.getenv("INPERAUDIO_API_URL", "http://localhost:8000/api")).rstrip("/")
-
-    @staticmethod
-    def _runtime_root():
-        if getattr(sys, "frozen", False):
-            return Path(sys.executable).resolve().parent
-        return Path(__file__).resolve().parents[2]

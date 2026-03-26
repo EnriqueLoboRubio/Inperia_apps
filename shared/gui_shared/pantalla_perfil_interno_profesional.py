@@ -124,7 +124,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         tit.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_datos = QLabel()
         tam_icono = tit.fontMetrics().height() + 10
-        pixmap = QPixmap("assets/interno.png").scaled(
+        pixmap = QPixmap("assets:interno.png").scaled(
             tam_icono, tam_icono, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         icono_datos.setPixmap(pixmap)
@@ -170,7 +170,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         tit_legal.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_legal = QLabel()
         tam_icono_legal = tit_legal.fontMetrics().height() + 5
-        pixmap_legal = QPixmap("assets/justicia.png").scaled(
+        pixmap_legal = QPixmap("assets:justicia.png").scaled(
             tam_icono_legal, tam_icono_legal, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         icono_legal.setPixmap(pixmap_legal)
@@ -261,7 +261,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         titulo.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_entrevistas = QLabel()
         tam_icono = titulo.fontMetrics().height() + 5
-        pixmap = QPixmap("assets/entrevista.png").scaled(
+        pixmap = QPixmap("assets:entrevista.png").scaled(
             tam_icono, tam_icono, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         icono_entrevistas.setPixmap(pixmap)
@@ -291,7 +291,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         titulo.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_historial = QLabel()
         tam_icono = titulo.fontMetrics().height() + 5
-        pixmap = QPixmap("assets/historial.png").scaled(
+        pixmap = QPixmap("assets:historial.png").scaled(
             tam_icono, tam_icono, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         icono_historial.setPixmap(pixmap)
@@ -531,3 +531,4 @@ class PantallaPerfilInternoProfesional(QWidget):
             lay.addLayout(texto, 1)
             lay.addLayout(lateral)
             self.layout_historial.addWidget(card)
+

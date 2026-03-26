@@ -98,7 +98,7 @@ class PantallaResumen(QWidget):
         boton_layout = QHBoxLayout()
         boton_layout.addStretch() #icono a la derecha
                
-        icono_entrar = QIcon("assets/entrar.png")
+        icono_entrar = QIcon("assets:entrar.png")
 
         boton_entrar = QPushButton()
         boton_entrar.setFixedSize(45, 45)
@@ -142,3 +142,4 @@ class PantallaResumen(QWidget):
             tarjeta = self.crear_tarjeta_pregunta(i, titulo, texto_respuesta)
 
             self.scroll_content_layout.addWidget(tarjeta)
+

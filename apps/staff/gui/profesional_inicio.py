@@ -45,7 +45,7 @@ class VentanaProfesional(QMainWindow):
         self.init_ui()
 
     def setup_window(self):      
-        self.setWindowIcon(QIcon("assets/inperia.ico"))
+        self.setWindowIcon(QIcon("assets:inperia.ico"))
         self.setMinimumSize(1200,700)
         self.showMaximized()        
 
@@ -188,7 +188,7 @@ class VentanaProfesional(QMainWindow):
         self.boton_ajustes = QPushButton() 
         self.boton_ajustes.setToolTip("Ver ajustes")
         self.boton_ajustes.setFixedSize(50,50) 
-        self.boton_ajustes.setIcon(QIcon("assets/ajustes.png")) 
+        self.boton_ajustes.setIcon(QIcon("assets:ajustes.png")) 
         self.boton_ajustes.setIconSize(QSize(40,40)) 
         self.boton_ajustes.setStyleSheet("""
             QPushButton { 
@@ -212,7 +212,7 @@ class VentanaProfesional(QMainWindow):
         self.boton_usuario = QPushButton()
         self.boton_usuario.setToolTip("Perfil de usuario")
         self.boton_usuario.setFixedSize(50, 50)
-        self.boton_usuario.setIcon(QIcon("assets/profesional.png"))
+        self.boton_usuario.setIcon(QIcon("assets:profesional.png"))
         self.boton_usuario.setIconSize(QSize(40, 40))
         self.boton_usuario.setStyleSheet("""
             QPushButton { 
@@ -487,7 +487,7 @@ class VentanaProfesional(QMainWindow):
         layout_cabecera = QHBoxLayout()
 
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(
+        pixmap = QPixmap("assets:error.png").scaled(
             30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
         lbl_icono.setPixmap(pixmap)
@@ -572,3 +572,4 @@ class VentanaProfesional(QMainWindow):
     def _actualizar_titulo_pantalla(self, _index=None):
         actual = self.stacked_widget.currentWidget()
         self.titulo_pantalla.setText(self._titulos_por_pantalla.get(actual, "INPERIA"))
+

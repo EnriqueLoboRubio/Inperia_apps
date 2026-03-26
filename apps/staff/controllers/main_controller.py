@@ -1,6 +1,5 @@
-﻿import ctypes
+import ctypes
 import sys
-from pathlib import Path
 
 from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, QThread, Qt, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap
@@ -13,6 +12,7 @@ from db.data_seeding import ejecutar_data_seeding_inicial
 from gui.login import VentanaLoginStaff
 from gui.spinner_carga import DialogoCarga
 from ollama_service import OllamaService
+from utils.runtime_paths import shared_asset_path
 
 
 class OllamaStartupThread(QThread):
@@ -52,16 +52,8 @@ class StaffMainController:
         self.mostrar_splash_inicio()
 
     @staticmethod
-    def _runtime_root():
-        return (
-            Path(sys.executable).resolve().parent / "shared"
-            if getattr(sys, "frozen", False)
-            else Path(__file__).resolve().parents[3] / "shared"
-        )
-
-    @classmethod
-    def _asset_path(cls, filename):
-        return cls._runtime_root() / "assets" / filename
+    def _asset_path(filename):
+        return shared_asset_path(filename)
 
     def mostrar_splash_inicio(self):
         self.splash_widget = QWidget()
@@ -231,4 +223,3 @@ class StaffMainController:
 
     def ejecutar(self):
         sys.exit(self.app.exec_())
-

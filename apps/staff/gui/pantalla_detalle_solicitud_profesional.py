@@ -1,4 +1,4 @@
-锘縡rom unicodedata import normalize
+from unicodedata import normalize
 
 import html
 
@@ -24,32 +24,32 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
     DOCUMENTOS = [
         "Documento de identidad del familiar",
-        "Comprobante de relaci贸n familiar",
-        "Carta de invitaci贸n",
+        "Comprobante de relaci髇 familiar",
+        "Carta de invitaci髇",
     ]
 
     COMPROMISOS = [
         "Cumplir estrictamente con los horarios establecidos",
-        "Mantener contacto permanente con la instituci贸n",
+        "Mantener contacto permanente con la instituci髇",
         "No consumir alcohol ni sustancias prohibidas",
         "Presentar comprobantes de las actividades realizadas",
-        "Informar cualquier cambio en la programaci贸n",
+        "Informar cualquier cambio en la programaci髇",
         "No alejarse del lugar autorizado sin permiso",
     ]
 
     ESTADOS_ENTREVISTA_IA = {
         "evaluada": ("Evaluada", "#D9C4F1"),
-        "sin evaluacion": ("Sin evaluaci贸n", "#EFE6F8"),
+        "sin evaluacion": ("Sin evaluaci髇", "#EFE6F8"),
         "evaluando": ("Evaluando", "#E7D6F7"),
     }
 
     TIPOS_PERMISO = {
         "familiar": "Familiar",
-        "medico": "M茅dico",
+        "medico": "M閐ico",
         "educativo": "Educativo",
         "laboral": "Laboral",
-        "defuncion": "Defunci贸n",
-        "juridico": "Jur铆颅dico",
+        "defuncion": "Defunci髇",
+        "juridico": "Jur憝dico",
     }
 
     def __init__(self, parent=None):
@@ -103,7 +103,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self.lbl_estado_solicitud.setAlignment(Qt.AlignCenter)
         fila_superior.addWidget(self.lbl_estado_solicitud, alignment=Qt.AlignVCenter)
 
-        self.lbl_estado_entrevista = QLabel("Sin evaluaci贸n")
+        self.lbl_estado_entrevista = QLabel("Sin evaluaci髇")
         self.lbl_estado_entrevista.setAlignment(Qt.AlignCenter)
         fila_superior.addWidget(self.lbl_estado_entrevista, alignment=Qt.AlignVCenter)
         fila_superior.addStretch()
@@ -134,7 +134,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self.boton_ver_entrevista.setCursor(Qt.PointingHandCursor)
         self.boton_ver_entrevista.setStyleSheet(estilo_boton_accion)
         self.boton_ver_entrevista.setEnabled(False)
-        self.boton_ver_entrevista.setToolTip("Desactivado: esta solicitud a煤n no tiene entrevista.")
+        self.boton_ver_entrevista.setToolTip("Desactivado: esta solicitud a鷑 no tiene entrevista.")
         self.boton_ver_entrevista.clicked.connect(self._sin_accion)
         fila_acciones.addWidget(self.boton_ver_entrevista)
 
@@ -194,13 +194,13 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         fila_titulo.setContentsMargins(0, 0, 0, 0)
         fila_titulo.setSpacing(8)
 
-        titulo = QLabel("Informaci贸n b谩sica")
+        titulo = QLabel("Informaci髇 b醩ica")
         titulo.setStyleSheet(ESTILO_TITULO_PASO)
         icon_size = max(33, titulo.fontMetrics().height())
 
         icono_documento = QLabel()
         icono_documento.setPixmap(
-            QPixmap("assets/documento.png").scaled(
+            QPixmap("assets:documento.png").scaled(
                 icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -218,11 +218,11 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         grid.setVerticalSpacing(6)
 
         self.lbl_identificador = self._crear_par_label(grid, 0, 0, "Identificador:")
-        self.lbl_fecha_creacion = self._crear_par_label(grid, 0, 1, "Fecha creaci贸n:")
+        self.lbl_fecha_creacion = self._crear_par_label(grid, 0, 1, "Fecha creaci髇:")
         self.lbl_tipo = self._crear_par_label(grid, 1, 0, "Tipo:")
         self.lbl_urgencia = self._crear_par_label(grid, 1, 1, "Urgencia:")
-        self.lbl_motivo = self._crear_par_label(grid, 2, 0, "Motivo espec铆fico:", colspan=2)
-        self.lbl_descripcion = self._crear_par_label(grid, 3, 0, "Descripci贸n detallada:", colspan=2)
+        self.lbl_motivo = self._crear_par_label(grid, 2, 0, "Motivo espec韋ico:", colspan=2)
+        self.lbl_descripcion = self._crear_par_label(grid, 3, 0, "Descripci髇 detallada:", colspan=2)
         self.lbl_descripcion.setWordWrap(True)
 
         layout.addLayout(grid)
@@ -244,7 +244,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_calendario = QLabel()
         icono_calendario.setPixmap(
-            QPixmap("assets/calendario.png").scaled(
+            QPixmap("assets:calendario.png").scaled(
                 icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -265,7 +265,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self.lbl_hora_salida = self._crear_par_label(grid, 0, 1, "Hora salida:")
         self.lbl_fecha_fin = self._crear_par_label(grid, 1, 0, "Fecha fin:")
         self.lbl_hora_entrada = self._crear_par_label(grid, 1, 1, "Hora entrada:")
-        self.lbl_direccion_destino = self._crear_par_label(grid, 2, 0, "Direcci贸n destino:", colspan=2)
+        self.lbl_direccion_destino = self._crear_par_label(grid, 2, 0, "Direcci髇 destino:", colspan=2)
 
         layout.addLayout(grid)
         self.layout_scroll.addWidget(frame)
@@ -286,7 +286,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_contactos = QLabel()
         icono_contactos.setPixmap(
-            QPixmap("assets/contactos.png").scaled(
+            QPixmap("assets:contactos.png").scaled(
                 icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -307,9 +307,9 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         grid_cp.setHorizontalSpacing(26)
         grid_cp.setVerticalSpacing(6)
         self.lbl_cp_nombre = self._crear_par_label(grid_cp, 0, 0, "Nombre:")
-        self.lbl_cp_telf = self._crear_par_label(grid_cp, 0, 1, "Tel茅fono:")
-        self.lbl_cp_relacion = self._crear_par_label(grid_cp, 0, 2, "Relaci贸n:")
-        self.lbl_cp_direccion = self._crear_par_label(grid_cp, 1, 0, "Direcci贸n:", colspan=3)
+        self.lbl_cp_telf = self._crear_par_label(grid_cp, 0, 1, "Tel閒ono:")
+        self.lbl_cp_relacion = self._crear_par_label(grid_cp, 0, 2, "Relaci髇:")
+        self.lbl_cp_direccion = self._crear_par_label(grid_cp, 1, 0, "Direcci髇:", colspan=3)
         layout.addLayout(grid_cp)
 
         lbl_cs = QLabel("Contacto Secundario")
@@ -320,8 +320,8 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         grid_cs.setHorizontalSpacing(26)
         grid_cs.setVerticalSpacing(6)
         self.lbl_cs_nombre = self._crear_par_label(grid_cs, 0, 0, "Nombre:")
-        self.lbl_cs_telf = self._crear_par_label(grid_cs, 0, 1, "Tel茅fono:")
-        self.lbl_cs_relacion = self._crear_par_label(grid_cs, 0, 2, "Relaci贸n:")
+        self.lbl_cs_telf = self._crear_par_label(grid_cs, 0, 1, "Tel閒ono:")
+        self.lbl_cs_relacion = self._crear_par_label(grid_cs, 0, 2, "Relaci髇:")
         layout.addLayout(grid_cs)
 
         self.layout_scroll.addWidget(frame)
@@ -342,7 +342,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_observaciones = QLabel()
         icono_observaciones.setPixmap(
-            QPixmap("assets/info.png").scaled(
+            QPixmap("assets:info.png").scaled(
                 icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -380,7 +380,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_compromiso = QLabel()
         icono_compromiso.setPixmap(
-            QPixmap("assets/compromiso.png").scaled(
+            QPixmap("assets:compromiso.png").scaled(
                 icon_size_comp, icon_size_comp, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -411,7 +411,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_docs = QLabel()
         icono_docs.setPixmap(
-            QPixmap("assets/doc_solicitud.png").scaled(
+            QPixmap("assets:doc_solicitud.png").scaled(
                 icon_size_docs, icon_size_docs, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -448,7 +448,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
 
         icono_conclusion = QLabel()
         icono_conclusion.setPixmap(
-            QPixmap("assets/conclusion.png").scaled(
+            QPixmap("assets:conclusion.png").scaled(
                 icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
@@ -530,7 +530,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         self._aplicar_estado_entrevista(estado_eval)
 
         self.lbl_identificador.setText(self._texto_campo("Identificador:", getattr(solicitud, "id_solicitud", "-")))
-        self.lbl_fecha_creacion.setText(self._texto_campo("Fecha creaci贸n:", getattr(solicitud, "fecha_creacion", "")))
+        self.lbl_fecha_creacion.setText(self._texto_campo("Fecha creaci髇:", getattr(solicitud, "fecha_creacion", "")))
         self.lbl_tipo.setText(
             self._texto_campo(
                 "Tipo:",
@@ -538,8 +538,8 @@ class PantallaDetalleSolicitudProfesional(QWidget):
             )
         )
         self.lbl_urgencia.setText(self._texto_campo("Urgencia:", self._capitalizar(getattr(solicitud, "urgencia", ""))))
-        self.lbl_motivo.setText(self._texto_campo("Motivo espec铆fico:", getattr(solicitud, "motivo", "")))
-        self.lbl_descripcion.setText(self._texto_campo("Descripci贸n detallada:", getattr(solicitud, "descripcion", "")))
+        self.lbl_motivo.setText(self._texto_campo("Motivo espec韋ico:", getattr(solicitud, "motivo", "")))
+        self.lbl_descripcion.setText(self._texto_campo("Descripci髇 detallada:", getattr(solicitud, "descripcion", "")))
 
         self.lbl_fecha_inicio.setText(self._texto_campo("Fecha inicio:", getattr(solicitud, "fecha_inicio", "")))
         self.lbl_hora_salida.setText(self._texto_campo("Hora salida:", getattr(solicitud, "hora_salida", "")))
@@ -551,15 +551,15 @@ class PantallaDetalleSolicitudProfesional(QWidget):
             getattr(solicitud, "provincia", ""),
             getattr(solicitud, "cod_pos", ""),
         )
-        self.lbl_direccion_destino.setText(self._texto_campo("Direcci贸n destino:", dir_dest))
+        self.lbl_direccion_destino.setText(self._texto_campo("Direcci髇 destino:", dir_dest))
 
         self.lbl_cp_nombre.setText(self._texto_campo("Nombre:", getattr(solicitud, "nombre_cp", "")))
-        self.lbl_cp_telf.setText(self._texto_campo("Tel茅fono:", getattr(solicitud, "telf_cp", "")))
-        self.lbl_cp_relacion.setText(self._texto_campo("Relaci贸n:", getattr(solicitud, "relacion_cp", "")))
-        self.lbl_cp_direccion.setText(self._texto_campo("Direcci贸n:", getattr(solicitud, "direccion_cp", "")))
+        self.lbl_cp_telf.setText(self._texto_campo("Tel閒ono:", getattr(solicitud, "telf_cp", "")))
+        self.lbl_cp_relacion.setText(self._texto_campo("Relaci髇:", getattr(solicitud, "relacion_cp", "")))
+        self.lbl_cp_direccion.setText(self._texto_campo("Direcci髇:", getattr(solicitud, "direccion_cp", "")))
         self.lbl_cs_nombre.setText(self._texto_campo("Nombre:", getattr(solicitud, "nombre_cs", "")))
-        self.lbl_cs_telf.setText(self._texto_campo("Tel茅fono:", getattr(solicitud, "telf_cs", "")))
-        self.lbl_cs_relacion.setText(self._texto_campo("Relaci贸n:", getattr(solicitud, "relacion_cs", "")))
+        self.lbl_cs_telf.setText(self._texto_campo("Tel閒ono:", getattr(solicitud, "telf_cs", "")))
+        self.lbl_cs_relacion.setText(self._texto_campo("Relaci髇:", getattr(solicitud, "relacion_cs", "")))
 
         observaciones = str(getattr(solicitud, "observaciones", "") or "").strip()
         self.frame_observaciones.setVisible(bool(observaciones))
@@ -603,7 +603,7 @@ class PantallaDetalleSolicitudProfesional(QWidget):
         return "sin evaluacion"
 
     def _aplicar_estado_entrevista(self, estado_normalizado):
-        texto, color = self.ESTADOS_ENTREVISTA_IA.get(estado_normalizado, ("Sin evaluaci贸n", "#F2A0A0"))
+        texto, color = self.ESTADOS_ENTREVISTA_IA.get(estado_normalizado, ("Sin evaluaci髇", "#F2A0A0"))
         self.lbl_estado_entrevista.setText(texto)
         self.lbl_estado_entrevista.setStyleSheet(
             f"background-color: {color}; color: {color_texto_contraste(color)}; "
@@ -660,3 +660,4 @@ class PantallaDetalleSolicitudProfesional(QWidget):
     @staticmethod
     def _sin_accion():
         return
+

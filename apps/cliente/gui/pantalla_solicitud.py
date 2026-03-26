@@ -178,33 +178,33 @@ class Paso1Widget(QWidget):
         col2.setSpacing(15)
 
         self.tarjeta_familiar = PermisoTarjeta(
-            "assets/familia.png",
+            "assets:familia.png",
             "Salida familiar",
             "Visitada a familiares directos por motivos justificados"
         )
         self.tarjeta_educativo = PermisoTarjeta(
-            "assets/educacion.png",
+            "assets:educacion.png",
             "Permiso educativo",
             "Asistencia a actividades educativas o exámenes"
         )
         self.tarjeta_defuncion = PermisoTarjeta(
-            "assets/cruz.png",
+            "assets:cruz.png",
             "Permiso por defunción",
             "Asistencia a funeral de familiar directo"
         )
 
         self.tarjeta_medico = PermisoTarjeta(
-            "assets/corazon.png",
+            "assets:corazon.png",
             "Permiso médico",
             "Atención médica especializada o acompañamiento"
         )
         self.tarjeta_laboral = PermisoTarjeta(
-            "assets/negocio.png",
+            "assets:negocio.png",
             "Permiso laboral",
             "Actividades laborales o entrevistas de trabajo"
         )
         self.tarjeta_juridico = PermisoTarjeta(
-            "assets/justicia.png",
+            "assets:justicia.png",
             "Permiso jurídico",
             "Asistencia a citas legales o judiciales"
         )
@@ -853,7 +853,7 @@ class PantallaSolicitudInterno(QWidget):
         layout_cabecera.setSpacing(10)
         
         lbl_icono = QLabel()
-        pixmap = QPixmap("assets/error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        pixmap = QPixmap("assets:error.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
         lbl_icono.setPixmap(pixmap) 
         lbl_icono.setFixedSize(30, 30)
         lbl_icono.setStyleSheet("background: transparent; border: none;")
@@ -902,3 +902,4 @@ class PantallaSolicitudInterno(QWidget):
         layout_main.addWidget(fondo)
         
         dialogo.exec_()      
+

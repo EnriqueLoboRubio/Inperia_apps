@@ -17,10 +17,10 @@ class IndicadorProgreso(QWidget):
         self.estado = estado 
 
         #Iconos para pasos
-        self.icono_realizado = QPixmap("assets/realizado.png").scaled(100, 100, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
-        self.icono_pendiente = QPixmap("assets/pendiente.png").scaled(105, 105, Qt.KeepAspectRatio, Qt.SmoothTransformation)   
-        self.icono_rechazado = QPixmap("assets/rechazado.png").scaled(97, 97, Qt.KeepAspectRatio, Qt.SmoothTransformation)  
-        self.icono_circulo = QPixmap("assets/circulo.png").scaled(90, 90, Qt.KeepAspectRatio, Qt.SmoothTransformation) 
+        self.icono_realizado = QPixmap("assets:realizado.png").scaled(100, 100, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        self.icono_pendiente = QPixmap("assets:pendiente.png").scaled(105, 105, Qt.KeepAspectRatio, Qt.SmoothTransformation)   
+        self.icono_rechazado = QPixmap("assets:rechazado.png").scaled(97, 97, Qt.KeepAspectRatio, Qt.SmoothTransformation)  
+        self.icono_circulo = QPixmap("assets:circulo.png").scaled(90, 90, Qt.KeepAspectRatio, Qt.SmoothTransformation) 
 
         self.iniciar_ui()
 
@@ -393,7 +393,7 @@ class PantallaProgresoInterno(QWidget):
             
         # Icono documento
         doc_icon_label = QLabel(self)
-        icono = QPixmap("assets/documento.png").scaled(70, 60, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
+        icono = QPixmap("assets:documento.png").scaled(70, 60, Qt.KeepAspectRatio, Qt.SmoothTransformation)     
         doc_icon_label.setPixmap(icono)
         doc_icon_label.setFixedSize(80,80)
         doc_icon_label.setStyleSheet("background: transparent; border: none;")
@@ -421,7 +421,7 @@ class PantallaProgresoInterno(QWidget):
 
         # Icono estado
         estado_icon_label = QLabel(self)
-        icono = QPixmap("assets/importante.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        icono = QPixmap("assets:importante.png").scaled(30, 30, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         estado_icon_label.setPixmap(icono)
         estado_icon_label.setFixedSize(45,45)
         estado_icon_label.setStyleSheet("background: transparent; border: none;")
@@ -468,7 +468,7 @@ class PantallaProgresoInterno(QWidget):
         # --- BLOQUE 1: SOLICITANTE ---
         # (Fila 0, Columna 0)        
         self.widget_solicitante = self.crear_dato_detalle(
-            "assets/interno.png",      
+            "assets:interno.png",      
             "Solicitante",             
             "Nombre Apellido1 Apellido2", 
             "Nº RC 00000"          
@@ -478,7 +478,7 @@ class PantallaProgresoInterno(QWidget):
         # --- BLOQUE 2: FECHAS ---
         # (Fila 0, Columna 1)
         self.widget_fechas = self.crear_dato_detalle(
-            "assets/calendario.png", 
+            "assets:calendario.png", 
             "Fechas del Permiso",
             "00/00/0000 - 00/00/0000"
         )
@@ -487,7 +487,7 @@ class PantallaProgresoInterno(QWidget):
         # --- BLOQUE 3: DESTINO ---
         # (Fila 1, Columna 0)
         self.widget_destino = self.crear_dato_detalle(
-            "assets/destino.png",
+            "assets:destino.png",
             "Destino",
             "Domicilio familiar - Calle Principal 123, Pueblo",
             "Provincia, 0000"
@@ -785,3 +785,4 @@ class PantallaProgresoInterno(QWidget):
             
           
        
+

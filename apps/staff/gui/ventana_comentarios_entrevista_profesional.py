@@ -156,7 +156,7 @@ class VentanaComentariosEntrevistaProfesional(QDialog):
             self.boton_enviar = QPushButton("")
             self.boton_enviar.setCursor(Qt.PointingHandCursor)
             self.boton_enviar.setStyleSheet(ESTILO_BOTON_SIG_ATR)
-            self.boton_enviar.setIcon(QIcon("assets/enviar.svg"))
+            self.boton_enviar.setIcon(QIcon("assets:enviar.svg"))
             self.boton_enviar.setIconSize(QSize(18, 18))
             self.boton_enviar.setFixedSize(42, 42)
             self.boton_enviar.clicked.connect(self._enviar_comentario)
@@ -250,7 +250,7 @@ class VentanaComentariosEntrevistaProfesional(QDialog):
 
         boton_borrar = QPushButton("Borrar")
         boton_borrar.setCursor(Qt.PointingHandCursor)
-        boton_borrar.setIcon(QIcon("assets/borrar.svg"))
+        boton_borrar.setIcon(QIcon("assets:borrar.svg"))
         boton_borrar.setIconSize(QSize(14, 14))
         boton_borrar.setFixedHeight(26)
         boton_borrar.setStyleSheet(
@@ -312,3 +312,4 @@ class VentanaComentariosEntrevistaProfesional(QDialog):
             return
         self.entrevista.comentarios = nuevos
         self._recargar_comentarios()
+
