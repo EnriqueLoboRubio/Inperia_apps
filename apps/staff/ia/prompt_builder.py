@@ -48,14 +48,14 @@ class PromptBuilder:
             )
 
         return (
-            "Eres un asistente experto en evaluación penitenciaria.\n"
-            "Tu tarea es identificar solo las causas principales que explican la puntuación global de la entrevista.\n"
-            "No menciones porcentaje, puntuación numérica ni tipo de riesgo.\n"
-            "No repitas todas las preguntas. Sintetiza solo los aspectos más relevantes.\n"
-            "Responde exclusivamente con JSON válido en una sola línea.\n"
+            "Eres un asistente experto en evaluacion penitenciaria.\n"
+            "Tu tarea es identificar solo las causas principales que explican la puntuacion global de la entrevista.\n"
+            "No menciones porcentaje, puntuacion numerica ni tipo de riesgo.\n"
+            "No repitas todas las preguntas. Sintetiza solo los aspectos mas relevantes.\n"
+            "Responde exclusivamente con JSON valido en una sola linea.\n"
             'Formato exacto esperado: {"causas": ["causa breve 1", "causa breve 2", "causa breve 3"]}\n'
             "Debe haber entre 2 y 4 causas, redactadas de forma breve y clara.\n"
-            "No uses markdown ni añadas texto fuera del JSON.\n\n"
+            "No uses markdown ni anadas texto fuera del JSON.\n\n"
             "ENTREVISTA COMPLETA:\n"
             f"{chr(10).join(lineas_entrevista)}\n\n"
             "RESULTADOS DEL ANALISIS POR PREGUNTA:\n"
@@ -73,10 +73,10 @@ class PromptBuilder:
     def _normalizar_plantilla(plantilla):
         texto = str(plantilla or "")
         texto = (
-            texto.replace("â€œ", '"')
-            .replace("â€", '"')
-            .replace("â€˜", "'")
-            .replace("â€™", "'")
+            texto.replace("Ã¢â‚¬Å“", '"')
+            .replace("Ã¢â‚¬Â", '"')
+            .replace("Ã¢â‚¬Ëœ", "'")
+            .replace("Ã¢â‚¬â„¢", "'")
         )
 
         if "{pregunta}" not in texto and texto.count("{respuesta}") >= 2:

@@ -9,7 +9,8 @@ Esta carpeta es una separación de `Inperia` preparada para generar dos producto
 
 - `apps/cliente`: entrypoint, login y capas específicas del producto cliente.
 - `apps/staff`: entrypoint, login y capas específicas del producto staff.
-- `shared`: db, modelos, servicios, utilidades, IA y widgets reutilizados.
+- `shared`: db, modelos, servicios, utilidades y widgets reutilizados.
+- `apps/staff/ia`: logica de analisis IA usada por la app de staff.
 - `packaging/pyinstaller`: `.spec` para construir los ejecutables.
 - `packaging/installer`: scripts de Inno Setup para generar instaladores.
 - `scripts`: automatización de build e instalador.

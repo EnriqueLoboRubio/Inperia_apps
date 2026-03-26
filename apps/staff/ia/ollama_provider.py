@@ -34,7 +34,7 @@ class OllamaProvider:
             raise RuntimeError(f"Ollama devolvió HTTP {exc.code}: {detalle}") from exc
         except error.URLError as exc:
             raise RuntimeError(
-                "No se pudo conectar con Ollama. Verifique que esta iniciado en http://127.0.0.1:11434."
+                "No se pudo conectar con Ollama. Verifique que está iniciado en http://127.0.0.1:11434."
             ) from exc
         except Exception as exc:
             raise RuntimeError(f"Error al invocar Ollama: {exc}") from exc
@@ -42,7 +42,7 @@ class OllamaProvider:
         try:
             data = json.loads(raw)
         except json.JSONDecodeError as exc:
-            raise RuntimeError("Ollama devolvió una respuesta no válida.") from exc
+            raise RuntimeError("Ollama devolvió una respuesta no valida.") from exc
 
         texto = str(data.get("response", "") or "").strip()
         if not texto:

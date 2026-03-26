@@ -122,7 +122,7 @@ class AnalisisService:
             causas_texto = "no se han podido identificar causas principales."
         else:
             causas_texto = " ".join(
-                f"{indice}. {str(causa).strip().rstrip('.')}."
+                f"{indice}. {str(causa).strip().rstrip('.') }."
                 for indice, causa in enumerate(causas, start=1)
             )
         return (
@@ -170,7 +170,7 @@ class HiloAnalisisIA(QThread):
                     resultado.nivel,
                     resultado.justificacion,
                 ):
-                    raise RuntimeError(f"No se pudo guardar el analisis de la pregunta {id_pregunta}.")
+                    raise RuntimeError(f"No se pudo guardar el análisis de la pregunta {id_pregunta}.")
 
                 payload = {
                     "id_pregunta": resultado.id_pregunta,
