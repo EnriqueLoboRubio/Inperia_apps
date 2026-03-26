@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QTextEdit, QDialog, QFrame
 )
-from PyQt5.QtGui import QIcon, QFont, QPixmap, QTextCursor
+from PyQt5.QtGui import QIcon, QFont, QPixmap, QTextCursor, QFontMetrics
 from PyQt5.QtCore import Qt, QSize, pyqtSignal
 from datetime import datetime
 import os
@@ -95,6 +95,8 @@ class PantallaPreguntas(QWidget):
         self.texto_pregunta.setFont(QFont("Arial", 14))
         self.texto_pregunta.setAlignment(Qt.AlignCenter)
         self.texto_pregunta.setWordWrap(True)
+        altura_linea_pregunta = QFontMetrics(self.texto_pregunta.font()).lineSpacing()
+        self.texto_pregunta.setFixedHeight((altura_linea_pregunta * 4) + 12)
 
         self.txt_respuesta = QTextEdit()
         self.txt_respuesta.setFont(QFont("Arial", 12))
