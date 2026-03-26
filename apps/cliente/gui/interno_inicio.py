@@ -76,7 +76,7 @@ class VentanaInterno(QMainWindow):
         self.boton_hamburguesa = QPushButton("☰")
         self.boton_hamburguesa.setToolTip("Ver menú")
         self.boton_hamburguesa.setFixedSize(self.MENU_ANCHURA_CERRADO - 10, self.MENU_ANCHURA_CERRADO - 10) 
-        self.boton_hamburguesa.setFont(QFont("Arial", 20, QFont.Bold))
+        self.boton_hamburguesa.setFont(QFont("Arial", 14, QFont.Bold))
         self.boton_hamburguesa.setStyleSheet("""
             QPushButton { 
                 background-color: #444444; 
@@ -308,6 +308,8 @@ class VentanaInterno(QMainWindow):
         self.boton_perfil_menu.setToolTip("Ver y editar perfil")
         self.boton_perfil_menu.setFont(QFont("Arial", 10))
         self.boton_perfil_menu.setStyleSheet(self.boton_estilo)  
+        lado_boton_menu = self.boton_perfil_menu.sizeHint().height()
+        self.boton_hamburguesa.setFixedSize(lado_boton_menu, lado_boton_menu)
 
         self.boton_cerrar_sesion = QPushButton("Cerrar Sesión")
         self.boton_cerrar_sesion.setToolTip("Cerrar sesión y volver a la pantalla de inicio")
