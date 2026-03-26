@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
+from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QFont
 
@@ -8,6 +8,27 @@ from gui.estilos import *
 class Mensajes:
     def __init__(self, parent=None):
         self.parent = parent
+
+    def _centrar_dialogo(self, dialogo):
+        dialogo.adjustSize()
+
+        parent = self.parent
+        if parent is not None and parent.isVisible():
+            centro = parent.frameGeometry().center()
+            dialogo.move(
+                centro.x() - dialogo.width() // 2,
+                centro.y() - dialogo.height() // 2,
+            )
+            return
+
+        pantalla = QApplication.primaryScreen()
+        if pantalla is None:
+            return
+        area = pantalla.availableGeometry()
+        dialogo.move(
+            area.x() + (area.width() - dialogo.width()) // 2,
+            area.y() + (area.height() - dialogo.height()) // 2,
+        )
 
     def mostrar_advertencia(self, tit, mensaje):
         """
@@ -83,6 +104,7 @@ class Mensajes:
         
         layout_main.addWidget(fondo)
         
+        self._centrar_dialogo(dialogo)
         dialogo.exec_()  
 
     def mostrar_mensaje(self, titulo, mensaje):
@@ -156,6 +178,7 @@ class Mensajes:
         
         layout_main.addWidget(fondo)
         
+        self._centrar_dialogo(dialogo)
         dialogo.exec_()    
 
     def mostrar_confirmacion(self, titulo, mensaje):
@@ -246,6 +269,7 @@ class Mensajes:
         layout_main.addWidget(fondo)
 
         # --- EJECUCIÓN ---
+        self._centrar_dialogo(dialogo)
         resultado = dialogo.exec_()
         return resultado == QDialog.Accepted
 
@@ -344,6 +368,7 @@ class Mensajes:
 
         layout_main.addWidget(fondo)
 
+        self._centrar_dialogo(dialogo)
         resultado = dialogo.exec_()
         if resultado == 1:
             return "confirmar"
@@ -424,6 +449,7 @@ class Mensajes:
         
         layout_main.addWidget(fondo)
         
+        self._centrar_dialogo(dialogo)
         dialogo.exec_() 
 
     # MENSAJES DE SOLICITUD
@@ -550,6 +576,7 @@ class Mensajes:
         # --- EJECUCIÓN ---
         # exec_() bloquea la ventana hasta que se cierre.
         # Devuelve QDialog.Accepted (1) si pulsaron "Sí" o QDialog.Rejected (0) si "No"
+        self._centrar_dialogo(dialogo)
         resultado = dialogo.exec_()
         
         return resultado == QDialog.Accepted

@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 
-from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, Qt
+from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, QThread, Qt, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget
 
@@ -11,7 +11,20 @@ from controllers.login_controller_staff import LoginControllerStaff
 from controllers.profesional_controller import ProfesionalController
 from db.data_seeding import ejecutar_data_seeding_inicial
 from gui.login import VentanaLoginStaff
+from gui.spinner_carga import DialogoCarga
 from ollama_service import OllamaService
+
+
+class OllamaStartupThread(QThread):
+    finalizado = pyqtSignal(bool, str)
+
+    def __init__(self, ollama_service, parent=None):
+        super().__init__(parent)
+        self._ollama_service = ollama_service
+
+    def run(self):
+        ok = self._ollama_service.ensure_running()
+        self.finalizado.emit(ok, self._ollama_service.error_message or "")
 
 
 class StaffMainController:
@@ -33,6 +46,8 @@ class StaffMainController:
         self.controlador_profesional = None
         self.controlador_administrador = None
         self._ollama_service = OllamaService()
+        self._ollama_thread = None
+        self._dialogo_carga_ollama = None
 
         self.mostrar_splash_inicio()
 
@@ -101,24 +116,70 @@ class StaffMainController:
         self.ventana_login.close()
         self.login_controller = None
         if rol == "profesional":
-            ollama_ok = self._ollama_service.ensure_running()
             self.controlador_profesional = ProfesionalController(usuario, contrasena_plana)
             self._aplicar_icono_ventana(self.controlador_profesional.ventana_profesional)
             self.controlador_profesional.logout_signal.connect(self.regresar_login)
-            if not ollama_ok:
-                self.controlador_profesional.msg.mostrar_advertencia(
-                    "Ollama no disponible",
-                    self._ollama_service.error_message
-                    or "No se pudo iniciar Ollama. Las funciones de análisis IA pueden fallar.",
-                )
-            else:
-                self.controlador_profesional.msg.mostrar_mensaje("Ollama disponible", "Ollama se ha iniciado correctamente.")
+            self._iniciar_ollama_con_carga()
             return
         self.controlador_administrador = AdministradorController(usuario, contrasena_plana)
         self._aplicar_icono_ventana(self.controlador_administrador.ventana_administrador)
         self.controlador_administrador.logout_signal.connect(self.regresar_login)
 
+    def _iniciar_ollama_con_carga(self):
+        if self.controlador_profesional is None:
+            return
+
+        self._dialogo_carga_ollama = DialogoCarga(
+            "Iniciando Ollama. Espere un momento...",
+            self.controlador_profesional.ventana_profesional,
+        )
+        self._dialogo_carga_ollama.show()
+
+        self._ollama_thread = OllamaStartupThread(self._ollama_service)
+        self._ollama_thread.finalizado.connect(self._finalizar_arranque_ollama)
+        self._ollama_thread.finished.connect(self._limpiar_hilo_ollama)
+        self._ollama_thread.start()
+
+    def _finalizar_arranque_ollama(self, ollama_ok, error_message):
+        if self._dialogo_carga_ollama is not None:
+            self._dialogo_carga_ollama.close()
+            self._dialogo_carga_ollama.deleteLater()
+            self._dialogo_carga_ollama = None
+
+        if self.controlador_profesional is None:
+            return
+
+        self.controlador_profesional.ventana_profesional.raise_()
+        self.controlador_profesional.ventana_profesional.activateWindow()
+
+        if not ollama_ok:
+            self.controlador_profesional.msg.mostrar_advertencia(
+                "Ollama no disponible",
+                error_message
+                or "No se pudo iniciar Ollama. Las funciones de analisis IA pueden fallar.",
+            )
+            return
+
+        self.controlador_profesional.msg.mostrar_mensaje(
+            "Ollama disponible",
+            "Ollama se ha iniciado correctamente.",
+        )
+
+    def _limpiar_hilo_ollama(self):
+        if self._ollama_thread is None:
+            return
+        self._ollama_thread.deleteLater()
+        self._ollama_thread = None
+
     def regresar_login(self):
+        if self._dialogo_carga_ollama is not None:
+            self._dialogo_carga_ollama.close()
+            self._dialogo_carga_ollama.deleteLater()
+            self._dialogo_carga_ollama = None
+        if self._ollama_thread is not None:
+            self._ollama_thread.wait()
+            self._limpiar_hilo_ollama()
+
         if self.controlador_profesional:
             try:
                 self.controlador_profesional.cerrar_recursos()
@@ -141,6 +202,13 @@ class StaffMainController:
         self.mostrar_login()
 
     def _limpiar_recursos_sesion(self):
+        if self._dialogo_carga_ollama is not None:
+            self._dialogo_carga_ollama.close()
+            self._dialogo_carga_ollama.deleteLater()
+            self._dialogo_carga_ollama = None
+        if self._ollama_thread is not None:
+            self._ollama_thread.wait()
+            self._limpiar_hilo_ollama()
         if self.controlador_profesional:
             try:
                 self.controlador_profesional.cerrar_recursos()
@@ -163,6 +231,4 @@ class StaffMainController:
 
     def ejecutar(self):
         sys.exit(self.app.exec_())
-
-
 

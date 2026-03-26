@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtCore import QRectF
 from PyQt5.QtGui import QColor, QPainter
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QVBoxLayout, QWidget
 
 
 class SpinnerCarga(QWidget):
@@ -59,3 +59,79 @@ class SpinnerCarga(QWidget):
                 )
             )
             painter.restore()
+
+
+class DialogoCarga(QDialog):
+    def __init__(self, texto, parent=None):
+        super().__init__(parent)
+        self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
+        self.setModal(True)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+
+        layout_main = QVBoxLayout(self)
+        layout_main.setContentsMargins(0, 0, 0, 0)
+
+        tarjeta = QWidget()
+        tarjeta.setStyleSheet(
+            """
+            QWidget {
+                background-color: rgba(255, 255, 255, 245);
+                border: 1px solid #d5d5d5;
+                border-radius: 18px;
+            }
+            """
+        )
+
+        layout_tarjeta = QVBoxLayout(tarjeta)
+        layout_tarjeta.setContentsMargins(26, 24, 26, 24)
+        layout_tarjeta.setSpacing(12)
+
+        self.spinner = SpinnerCarga(parent=tarjeta, tam=42, color="#111111")
+        self.spinner.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+
+        lbl_texto = QLabel(str(texto or "").strip())
+        lbl_texto.setAlignment(Qt.AlignCenter)
+        lbl_texto.setWordWrap(True)
+        lbl_texto.setStyleSheet(
+            """
+            QLabel {
+                color: #111111;
+                font-family: 'Arial';
+                font-size: 10pt;
+                font-weight: 600;
+                background: transparent;
+                border: none;
+            }
+            """
+        )
+
+        layout_tarjeta.addWidget(self.spinner, alignment=Qt.AlignCenter)
+        layout_tarjeta.addWidget(lbl_texto)
+        layout_main.addWidget(tarjeta)
+
+        self.setFixedSize(280, 150)
+        self.spinner.start()
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        self._centrar()
+
+    def closeEvent(self, event):
+        self.spinner.stop()
+        super().closeEvent(event)
+
+    def _centrar(self):
+        parent = self.parentWidget()
+        if parent is not None and parent.isVisible():
+            origen = parent.frameGeometry().center()
+            self.move(origen.x() - self.width() // 2, origen.y() - self.height() // 2)
+            return
+
+        pantalla = QApplication.primaryScreen()
+        if pantalla is None:
+            return
+        area = pantalla.availableGeometry()
+        self.move(
+            area.x() + (area.width() - self.width()) // 2,
+            area.y() + (area.height() - self.height()) // 2,
+        )
