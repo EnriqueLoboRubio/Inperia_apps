@@ -10,6 +10,8 @@ from controllers.interno_controller import InternoController
 from controllers.login_controller_cliente import LoginControllerCliente
 from db.data_seeding import ejecutar_data_seeding_inicial
 from gui.login import VentanaLoginCliente
+from utils.runtime_paths import vosk_model_root
+from utils.vosk_model_manager import obtener_gestor_modelo_vosk
 
 
 class ClienteMainController:
@@ -29,6 +31,7 @@ class ClienteMainController:
         self.login_controller = None
         self.ventana_login = None
         self.controlador_interno = None
+        self._iniciar_precarga_modelo_vosk()
 
         self.mostrar_splash_inicio()
 
@@ -43,6 +46,10 @@ class ClienteMainController:
     @classmethod
     def _asset_path(cls, filename):
         return cls._runtime_root() / "assets" / filename
+
+    def _iniciar_precarga_modelo_vosk(self):
+        ruta_modelo_vosk = str(vosk_model_root("big"))
+        obtener_gestor_modelo_vosk(ruta_modelo_vosk).precargar_async()
 
     def mostrar_splash_inicio(self):
         self.splash_widget = QWidget()

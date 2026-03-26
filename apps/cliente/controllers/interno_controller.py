@@ -24,6 +24,7 @@ from models.solicitud import Solicitud
 from services.audio_service import AudioService
 from utils.enums import Tipo_estado_solicitud
 from utils.inperiaudio_client import AudioApiError
+from utils.runtime_paths import grabaciones_root
 
 
 class InternoController(QObject):
@@ -476,7 +477,7 @@ class InternoController(QObject):
         if self._audio_client is not None:
             self._audio_client.cleanup()
 
-        carpeta_grabaciones = Path(__file__).resolve().parents[3] / "data" / "grabaciones"
+        carpeta_grabaciones = grabaciones_root()
         if os.path.exists(carpeta_grabaciones):
             shutil.rmtree(carpeta_grabaciones, ignore_errors=True)
 
