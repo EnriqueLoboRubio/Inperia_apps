@@ -41,7 +41,7 @@ python apps/staff/main.py
 
 Los builds usan `PyInstaller` en modo `onedir`.
 
-- `Inperia Cliente` empaqueta `reportlab`, `vosk`, `PyAudio`, `sounddevice` y solo el modelo `big`.
+- `Inperia Cliente` empaqueta `reportlab`, `vosk`, `PyAudio`, `sounddevice` y solo el modelo `big` de Vosk.
 - `Inperia Staff` empaqueta `reportlab` y la IA de `apps/staff/ia`, sin Vosk.
 
 ```powershell

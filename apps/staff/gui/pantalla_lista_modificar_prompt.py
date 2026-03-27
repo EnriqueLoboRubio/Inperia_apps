@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,
     QScrollArea, QFrame, QSizePolicy, QButtonGroup
@@ -47,7 +48,7 @@ class PantallaListaModificarPrompt(QWidget):
 
         top_tarjeta_layout = QHBoxLayout()
 
-        sufijo_version = f" - Versión {int(version)}" if version is not None else ""
+        sufijo_version = f" - Version {int(version)}" if version is not None else ""
         lbl_titulo = QLabel(f"Prompt {numero_mostrar}: {titulo}{sufijo_version}")
         lbl_titulo.setFont(QFont("Arial", 16, QFont.Bold))
         lbl_titulo.setStyleSheet("border: none; color: black;")
@@ -115,4 +116,3 @@ class PantallaListaModificarPrompt(QWidget):
             version = datos.get("version")
             tarjeta = self.crear_tarjeta_prompt(numero, numero, titulo, texto, version=version)
             self.scroll_content_layout.addWidget(tarjeta)
-

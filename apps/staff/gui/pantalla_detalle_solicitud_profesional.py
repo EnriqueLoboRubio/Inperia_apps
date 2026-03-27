@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 from unicodedata import normalize
 
 import html
