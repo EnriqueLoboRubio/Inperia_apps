@@ -3,6 +3,8 @@ import os
 import psycopg2
 from psycopg2 import pool
 
+from utils.app_config import get_database_settings
+
 
 def _obtener_env(nombre, default=None):
     valor = os.getenv(nombre, default)
@@ -40,12 +42,13 @@ class _ConexionPoolProxy:
 
 
 def _parametros_conexion():
+    config = get_database_settings()
     return {
-        "host": _obtener_env("PGHOST", "127.0.0.1"),
-        "port": int(_obtener_env("PGPORT", "5432")),
-        "dbname": _obtener_env("PGDATABASE", "Inperia_db"),
-        "user": _obtener_env("PGUSER", "postgres"),
-        "password": _obtener_env("PGPASSWORD", "1234"),
+        "host": _obtener_env("PGHOST", config["host"]),
+        "port": int(_obtener_env("PGPORT", str(config["port"]))),
+        "dbname": _obtener_env("PGDATABASE", config["dbname"]),
+        "user": _obtener_env("PGUSER", config["user"]),
+        "password": _obtener_env("PGPASSWORD", config["password"]),
     }
 
 

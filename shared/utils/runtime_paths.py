@@ -124,6 +124,8 @@ def app_config_candidates():
 
 
 def ensure_runtime_directories():
+    from utils.app_config import ensure_user_config
+
     directories = [
         app_user_root(),
         app_data_root(),
@@ -136,6 +138,8 @@ def ensure_runtime_directories():
 
     for directory in directories:
         directory.mkdir(parents=True, exist_ok=True)
+
+    ensure_user_config()
 
 
 def init_qt_search_paths():

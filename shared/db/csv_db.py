@@ -250,9 +250,12 @@ def importar_base_datos_desde_csv(carpeta_origen):
 
 
 def obtener_resumen_csv():
+    from utils.app_config import get_database_settings
+
+    database = get_database_settings()
     return {
-        "base_datos": os.getenv("PGDATABASE"),
-        "host": os.getenv("PGHOST", "localhost"),
+        "base_datos": database["dbname"],
+        "host": database["host"],
         "tablas": listar_tablas_exportables(),
     }
 

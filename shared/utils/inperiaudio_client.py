@@ -1,13 +1,13 @@
 import json
 import mimetypes
-import os
 import shutil
 import socket
 from pathlib import Path
 from urllib import error, parse, request
 from uuid import uuid4
 
-from utils.runtime_paths import app_config_candidates, audio_cache_root
+from utils.app_config import get_api_base_url
+from utils.runtime_paths import audio_cache_root
 
 
 class AudioApiError(RuntimeError):
@@ -169,19 +169,4 @@ class InperiaAudioClient:
     def _resolve_base_url(explicit_base_url=None):
         if explicit_base_url:
             return str(explicit_base_url).rstrip("/")
-
-        for config_path in app_config_candidates():
-            if config_path is None:
-                continue
-            config_path = Path(config_path)
-            if not config_path.exists():
-                continue
-            try:
-                data = json.loads(config_path.read_text(encoding="utf-8"))
-                base_url = str(data.get("inperiaudio_api_url") or "").strip()
-                if base_url:
-                    return base_url.rstrip("/")
-            except Exception:
-                pass
-
-        return str(os.getenv("INPERAUDIO_API_URL", "http://localhost:8000/api")).rstrip("/")
+        return get_api_base_url()
