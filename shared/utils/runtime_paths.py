@@ -72,12 +72,6 @@ def shared_data_file(filename):
     return shared_data_root() / filename
 
 
-def app_packaged_config_root():
-    if getattr(sys, "frozen", False):
-        return runtime_root() / "apps" / app_id() / "config"
-    return project_root() / "apps" / app_id() / "config"
-
-
 def _local_appdata_root():
     local_appdata = os.getenv("LOCALAPPDATA")
     if local_appdata:
@@ -118,7 +112,6 @@ def app_config_candidates():
     return [
         Path(os.getenv("INPERIA_CONFIG_PATH", "")).expanduser() if os.getenv("INPERIA_CONFIG_PATH") else None,
         user_config,
-        app_packaged_config_root() / "config.json",
         shared_root() / "config.json",
     ]
 

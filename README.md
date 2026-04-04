@@ -33,7 +33,7 @@ python apps/staff/main.py
 ## Requisitos de configuracion
 
 - Base de datos PostgreSQL accesible con la configuracion del archivo `config.json` o, si se necesita sobrescribirla, con las variables `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`.
-- API de audio configurada en `apps/cliente/config/config.json`, `apps/staff/config/config.json`, `shared/config.json`, `%LOCALAPPDATA%\\Inperia Cliente\\config.json`, `%LOCALAPPDATA%\\Inperia Staff\\config.json` o la variable `INPERAUDIO_API_URL`.
+- API de audio configurada en `shared/config.json`, `%LOCALAPPDATA%\\Inperia Cliente\\config.json`, `%LOCALAPPDATA%\\Inperia Staff\\config.json` o la variable `INPERAUDIO_API_URL`.
 - Modelo local de Vosk en `shared/utils/vosk-es/big` para la transcripcion de `Inperia Cliente`.
 - Los datos mutables se guardan en `%LOCALAPPDATA%\\Inperia Cliente` y `%LOCALAPPDATA%\\Inperia Staff`.
 

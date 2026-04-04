@@ -10,9 +10,7 @@ shared/utils/whisper-large-v2/
 data/
 
 # Empaquetacion
-packaging/
 dist/
-build/
 
 scripts/
 
