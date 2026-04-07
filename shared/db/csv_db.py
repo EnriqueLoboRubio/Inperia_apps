@@ -92,6 +92,21 @@ def _obtener_metadata_columnas(cursor, tabla):
     ]
 
 
+def _obtener_columnas_identidad_always(cursor, tabla):
+    cursor.execute(
+        """
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = %s
+          AND is_identity = 'YES'
+          AND identity_generation = 'ALWAYS'
+        """,
+        (tabla,),
+    )
+    return {fila[0] for fila in cursor.fetchall() if fila}
+
+
 def _mapa_dependencias(cursor, tablas):
     dependencias = {tabla: set() for tabla in tablas}
     cursor.execute(
@@ -222,6 +237,7 @@ def importar_base_datos_desde_csv(carpeta_origen):
             info = datos_por_tabla[tabla]
             columnas = info["columnas"]
             filas = info["filas"]
+            columnas_identidad_always = _obtener_columnas_identidad_always(cursor, tabla)
             if filas:
                 metadata = _obtener_metadata_columnas(cursor, tabla)
                 filas_normalizadas = [
@@ -231,12 +247,32 @@ def importar_base_datos_desde_csv(carpeta_origen):
                 placeholders = ", ".join(["%s"] * len(columnas))
                 columnas_sql = ", ".join(columnas)
                 overriding = ""
-                if tabla in IDENTITY_ALWAYS_TABLES and "id" in columnas:
+                if columnas_identidad_always.intersection(columnas):
                     overriding = " OVERRIDING SYSTEM VALUE"
                 cursor.executemany(
                     f"INSERT INTO {tabla} ({columnas_sql}){overriding} VALUES ({placeholders})",
                     filas_normalizadas,
                 )
+
+            for columna_identidad in columnas_identidad_always:
+                cursor.execute(
+                    "SELECT pg_get_serial_sequence(%s, %s)",
+                    (tabla, columna_identidad),
+                )
+                fila_secuencia = cursor.fetchone()
+                nombre_secuencia = fila_secuencia[0] if fila_secuencia else None
+                if not nombre_secuencia:
+                    continue
+
+                cursor.execute(
+                    f'SELECT COALESCE(MAX("{columna_identidad}"), 0) FROM "{tabla}"'
+                )
+                maximo_actual = cursor.fetchone()[0] or 0
+                if maximo_actual > 0:
+                    cursor.execute(
+                        "SELECT setval(%s, %s, true)",
+                        (nombre_secuencia, maximo_actual),
+                    )
 
             resumen.append({"tabla": tabla, "filas": len(filas), "ruta": info["ruta"]})
 

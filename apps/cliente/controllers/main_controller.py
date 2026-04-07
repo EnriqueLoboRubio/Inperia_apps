@@ -1,5 +1,6 @@
 import ctypes
 import sys
+import traceback
 
 from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, Qt
 from PyQt5.QtGui import QIcon, QPixmap
@@ -92,7 +93,18 @@ class ClienteMainController:
         self.ventana_login.show()
 
     def manejar_login_exitoso(self, usuario, rol, contrasena_plana):
-        self.controlador_interno = InternoController(usuario, contrasena_plana)
+        try:
+            controlador_interno = InternoController(usuario, contrasena_plana)
+        except Exception as exc:
+            traceback.print_exc()
+            if self.ventana_login is not None:
+                self.ventana_login.mostrar_mensaje_error(
+                    "No se pudo abrir la sesion del interno.\n\n"
+                    f"Detalle: {exc}"
+                )
+            return
+
+        self.controlador_interno = controlador_interno
         self._aplicar_icono_ventana(self.controlador_interno.ventana_interno)
         self.controlador_interno.ventana_interno.show()
         self.controlador_interno.logout_signal.connect(self.regresar_login)

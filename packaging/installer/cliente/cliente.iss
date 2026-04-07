@@ -24,7 +24,7 @@ Name: "{localappdata}\Inperia Cliente"
 
 [Files]
 Source: "..\..\..\dist\cliente\Inperia Cliente\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\..\shared\config.json"; DestDir: "{localappdata}\Inperia Cliente"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "..\..\config\default_config.json"; DestDir: "{localappdata}\Inperia Cliente"; DestName: "config.json"; Flags: onlyifdoesntexist uninsneveruninstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

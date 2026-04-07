@@ -24,7 +24,7 @@ Name: "{localappdata}\Inperia Staff"
 
 [Files]
 Source: "..\..\..\dist\staff\Inperia Staff\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\..\shared\config.json"; DestDir: "{localappdata}\Inperia Staff"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "..\..\config\default_config.json"; DestDir: "{localappdata}\Inperia Staff"; DestName: "config.json"; Flags: onlyifdoesntexist uninsneveruninstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

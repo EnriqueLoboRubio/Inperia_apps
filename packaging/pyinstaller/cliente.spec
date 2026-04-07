@@ -8,7 +8,6 @@ project_root = Path.cwd()
 app_root = project_root / "apps" / "cliente"
 
 datas = [
-    (str(project_root / "shared" / "config.json"), "shared"),
     (str(project_root / "shared" / "assets"), "shared/assets"),
     (str(project_root / "shared" / "data"), "shared/data"),
     (str(project_root / "shared" / "utils" / "vosk-es" / "big"), "shared/utils/vosk-es/big"),

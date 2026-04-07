@@ -42,6 +42,10 @@ class InternoController(QObject):
         self._inicializar_audio_api(contrasena_plana)
 
         self.interno = self.cargar_interno()
+        if self.interno is None:
+            raise ValueError(
+                "El usuario ha iniciado sesion, pero no tiene perfil de interno asociado."
+            )
         self.solicitud_actual = self.cargar_ultima_solicitud()
 
         self._cargar_estado_inicial_en_vista()

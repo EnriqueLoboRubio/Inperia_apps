@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, pyqtSignal
 
-from gui.estilos import *
+from gui_shared.estilos import *
 
 
 class PantallaPerfil(QWidget):
@@ -79,7 +79,7 @@ class PantallaPerfil(QWidget):
         self.input_pass_2.setStyleSheet(ESTILO_INPUT)
         perfil_layout.addWidget(self.input_pass_2)
 
-        ayuda_password = QLabel("Si dejas vacíos los campos de contraseña, no se modificará.")
+        ayuda_password = QLabel("Si deja vacíos los campos de contraseña, no se modificará.")
         ayuda_password.setStyleSheet(ESTILO_TEXTO)
         ayuda_password.setWordWrap(True)
         perfil_layout.addWidget(ayuda_password)

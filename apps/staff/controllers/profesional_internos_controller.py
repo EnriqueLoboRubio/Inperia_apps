@@ -80,6 +80,9 @@ class ProfesionalInternosController:
             )
             self.controlador.ventana_profesional.establecer_titulo_pantalla("Solicitud")
             return
+        self.controlador.ventana_profesional.stacked_widget.setCurrentWidget(
+            self.controlador.ventana_profesional.pantalla_lista_solicitud
+        )
         self.controlador.recargar_lista_actual()
 
     def _obtener_interno_de_solicitud(self, solicitud):

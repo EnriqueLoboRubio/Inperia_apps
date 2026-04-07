@@ -95,6 +95,10 @@ def app_logs_root():
     return app_user_root() / "logs"
 
 
+def app_config_path():
+    return app_user_root() / "config.json"
+
+
 def audio_cache_root():
     return app_cache_root() / "audios_cache"
 
@@ -108,17 +112,13 @@ def vosk_model_root(size="big"):
 
 
 def app_config_candidates():
-    user_config = app_user_root() / "config.json"
     return [
+        app_config_path(),
         Path(os.getenv("INPERIA_CONFIG_PATH", "")).expanduser() if os.getenv("INPERIA_CONFIG_PATH") else None,
-        user_config,
-        shared_root() / "config.json",
     ]
 
 
 def ensure_runtime_directories():
-    from utils.app_config import ensure_user_config
-
     directories = [
         app_user_root(),
         app_data_root(),
@@ -131,8 +131,6 @@ def ensure_runtime_directories():
 
     for directory in directories:
         directory.mkdir(parents=True, exist_ok=True)
-
-    ensure_user_config()
 
 
 def init_qt_search_paths():

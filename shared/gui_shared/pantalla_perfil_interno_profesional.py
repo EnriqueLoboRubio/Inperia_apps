@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
-from gui.estilos import *
+from gui_shared.estilos import *
 from utils.condena_utils import condena_double_a_partes, formatear_condena
 
 
@@ -166,7 +166,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         fila_titulo_legal.setContentsMargins(0, 0, 0, 0)
         fila_titulo_legal.setSpacing(8)
 
-        tit_legal = QLabel("Informacion Legal")
+        tit_legal = QLabel("Información Legal")
         tit_legal.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_legal = QLabel()
         tam_icono_legal = tit_legal.fontMetrics().height() + 5
@@ -195,9 +195,9 @@ class PantallaPerfilInternoProfesional(QWidget):
             grid_legal, 1, 1, "Tiempo Restante"
         )
         self.lbl_situacion_val = self._crear_bloque_info(
-            grid_legal, 2, 0, "Situacion legal"
+            grid_legal, 2, 0, "Situación legal"
         )
-        self.lbl_modulo_val = self._crear_bloque_info(grid_legal, 2, 1, "Modulo")
+        self.lbl_modulo_val = self._crear_bloque_info(grid_legal, 2, 1, "Módulo")
 
         legal_layout.addLayout(grid_legal)
         legal_layout.addStretch()
@@ -239,12 +239,12 @@ class PantallaPerfilInternoProfesional(QWidget):
         dias_rest = (dias % 365) % 30
         partes = []
         if anos_rest:
-            partes.append(f"{anos_rest} ano" if anos_rest == 1 else f"{anos_rest} anos")
+            partes.append(f"{anos_rest} año" if anos_rest == 1 else f"{anos_rest} años")
         if meses_rest:
             partes.append(f"{meses_rest} mes" if meses_rest == 1 else f"{meses_rest} meses")
         if dias_rest:
-            partes.append(f"{dias_rest} dia" if dias_rest == 1 else f"{dias_rest} dias")
-        return ", ".join(partes) if partes else "0 dias"
+            partes.append(f"{dias_rest} día" if dias_rest == 1 else f"{dias_rest} días")
+        return ", ".join(partes) if partes else "0 días"
 
     def _crear_bloque_entrevistas(self):
         self.frame_entrevistas = QFrame()
@@ -257,7 +257,7 @@ class PantallaPerfilInternoProfesional(QWidget):
         fila_titulo_entrevistas.setContentsMargins(0, 0, 0, 0)
         fila_titulo_entrevistas.setSpacing(8)
 
-        titulo = QLabel("Ultimas entrevistas")
+        titulo = QLabel("Últimas entrevistas")
         titulo.setStyleSheet(ESTILO_TITULO_APARTADO_SOLICITUD)
         icono_entrevistas = QLabel()
         tam_icono = titulo.fontMetrics().height() + 5
@@ -326,9 +326,9 @@ class PantallaPerfilInternoProfesional(QWidget):
     def _normalizar_tipo_solicitud(tipo):
         texto = str(tipo or "").strip().lower()
         mapa_tipos = {
-            "medico": "Medico",
-            "defuncion": "Defuncion",
-            "juridico": "Juridico",
+            "medico": "Médico",
+            "defuncion": "Defunción",
+            "juridico": "Jurídico",
         }
         if texto in mapa_tipos:
             return mapa_tipos[texto]
@@ -438,7 +438,7 @@ class PantallaPerfilInternoProfesional(QWidget):
                 eval_layout.setContentsMargins(16, 12, 16, 12)
                 eval_layout.setSpacing(8)
 
-                lbl_titulo_eval = QLabel("Conclusion IA:")
+                lbl_titulo_eval = QLabel("Conclusión IA:")
                 lbl_titulo_eval.setStyleSheet(
                     "font-size: 12pt; font-weight: bold; color: #1A1A1A;"
                 )

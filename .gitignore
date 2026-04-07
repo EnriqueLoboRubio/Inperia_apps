@@ -13,4 +13,5 @@ data/
 dist/
 
 scripts/
-
+tmp_localappdata_staff/
+tmp_localappdata_client/
