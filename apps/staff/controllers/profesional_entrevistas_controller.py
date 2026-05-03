@@ -75,7 +75,10 @@ class ProfesionalEntrevistasController:
         self._abrir_resumen_entrevista(
             entrevista,
             nombre_interno,
-            solo_lectura=self._resumen_debe_ser_solo_lectura(solicitud),
+            solo_lectura=(
+                self.controlador._detalle_solicitud_solo_lectura
+                or self._resumen_debe_ser_solo_lectura(solicitud)
+            ),
         )
 
     def mostrar_ultima_entrevista_desde_internos(self, dato_interno):

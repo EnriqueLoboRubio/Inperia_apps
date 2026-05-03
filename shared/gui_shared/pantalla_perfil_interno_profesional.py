@@ -424,7 +424,7 @@ class PantallaPerfilInternoProfesional(QWidget):
             fila_pie.addWidget(boton_ver)
             fila_pie.addSpacing(8)
             puntuacion_txt = "0000" if puntuacion is None else str(puntuacion)
-            puntuacion_lbl = QLabel(f"Puntuacion: {puntuacion_txt}")
+            puntuacion_lbl = QLabel(f"Puntuación: {puntuacion_txt}")
             puntuacion_lbl.setStyleSheet(ESTILO_PUNTUACION_ENTREVISTA)
             fila_pie.addWidget(puntuacion_lbl)
 

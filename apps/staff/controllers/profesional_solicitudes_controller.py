@@ -246,6 +246,9 @@ class ProfesionalSolicitudesController:
             try:
                 if int(fila[0]) == int(id_solicitud):
                     solicitud = self._construir_solicitud_desde_fila(fila)
+                    solicitud.entrevista = self.controlador.entrevistas.cargar_entrevista_solicitud(
+                        solicitud.id_solicitud
+                    )
                     break
             except (TypeError, ValueError, IndexError):
                 continue
