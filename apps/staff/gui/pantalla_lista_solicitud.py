@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QSize, QTimer, Qt, pyqtSignal
+from PyQt5.QtCore import QTimer, Qt, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import (
     QComboBox,
@@ -340,29 +340,6 @@ class PantallaListaSolicitud(QWidget):
         self.input_busqueda.addAction(icono_busqueda, QLineEdit.LeadingPosition)
         self.input_busqueda.textChanged.connect(self._al_cambiar_texto_busqueda)
 
-        self.boton_filtros = QPushButton("Filtros")
-        self.boton_filtros.setFixedSize(180, 40)
-        self.boton_filtros.setCursor(Qt.PointingHandCursor)
-        self.boton_filtros.setEnabled(False)
-        self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aún no está disponible.")
-        tam_icono_filtros = self.boton_filtros.fontMetrics().height() + 3
-        self.boton_filtros.setIcon(QIcon("assets:filtros.png"))
-        self.boton_filtros.setIconSize(QSize(tam_icono_filtros, tam_icono_filtros))
-        self.boton_filtros.setStyleSheet(
-            """
-            QPushButton {
-                background-color: #ECECEC;
-                border: 1px solid #BEBEBE;
-                border-radius: 20px;
-                color: #8E8E8E;
-                font-size: 11pt;
-                font-weight: 500;
-                padding: 0 14px;
-            }
-            QPushButton:disabled { color: #A8A8A8; }
-            """
-        )
-
         self.combo_estado = QComboBox()
         self.combo_estado.setFixedSize(210, 40)
         self.combo_estado.addItems(OPCIONES_COMBO_POR_TOP[None])
@@ -371,7 +348,6 @@ class PantallaListaSolicitud(QWidget):
         self.combo_estado.currentTextChanged.connect(self._al_cambiar_combo_estado)
 
         fila.addWidget(self.input_busqueda, 1)
-        fila.addWidget(self.boton_filtros)
         fila.addWidget(self.combo_estado)
         return fila
 

@@ -1,4 +1,4 @@
-from PyQt5.QtCore import Qt, pyqtSignal, QSize
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import (
     QWidget,
@@ -351,30 +351,6 @@ class PantallaListaInternosProfesional(QWidget):
         self.input_busqueda.addAction(icono_busqueda, QLineEdit.LeadingPosition)
         self.input_busqueda.textChanged.connect(self._actualizar_lista)
         fila_filtros.addWidget(self.input_busqueda, 1)
-
-        self.boton_filtros = QPushButton("Filtros")
-        self.boton_filtros.setFixedSize(180, 40)
-        self.boton_filtros.setCursor(Qt.PointingHandCursor)
-        self.boton_filtros.setEnabled(False)
-        self.boton_filtros.setToolTip("Desactivado: el filtrado avanzado aún no está disponible.")
-        tam_icono_filtros = self.boton_filtros.fontMetrics().height() + 3
-        self.boton_filtros.setIcon(QIcon("assets:filtros.png"))
-        self.boton_filtros.setIconSize(QSize(tam_icono_filtros, tam_icono_filtros))
-        self.boton_filtros.setStyleSheet(
-            """
-            QPushButton {
-                background-color: #ECECEC;
-                border: 1px solid #BEBEBE;
-                border-radius: 20px;
-                color: #8E8E8E;
-                font-size: 11pt;
-                font-weight: 500;
-                padding: 0 14px;
-            }
-            QPushButton:disabled { color: #A8A8A8; }
-            """
-        )
-        fila_filtros.addWidget(self.boton_filtros)
 
         layout_principal.addLayout(fila_filtros)
 
