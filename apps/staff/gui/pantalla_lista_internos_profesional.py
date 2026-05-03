@@ -11,9 +11,10 @@ from PyQt5.QtWidgets import (
     QFrame,
     QPushButton,
 )
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 from gui.estilos import *
+from utils.condena_utils import condena_double_a_partes
 
 
 BAREMOS_RIESGO = [
@@ -153,6 +154,7 @@ class TarjetaInternoAsignado(QFrame):
         fila_detalles.setColumnMinimumWidth(1, 120)
         fila_detalles.setColumnMinimumWidth(2, 180)
         fila_detalles.setColumnMinimumWidth(3, 280)
+        fila_detalles.setColumnStretch(0, 1)
         fila_detalles.setColumnStretch(3, 1)
 
         fila_detalles.addLayout(
@@ -160,7 +162,13 @@ class TarjetaInternoAsignado(QFrame):
             0, 0, alignment=Qt.AlignTop | Qt.AlignLeft
         )
         fila_detalles.addLayout(
-            self._crear_bloque_texto("Condena", f"{getattr(self.interno, 'condena', '-') or '-'} años"),
+            self._crear_bloque_texto(
+                "Condena restante",
+                self._texto_condena_restante(
+                    getattr(self.interno, "fecha_ingreso", "-"),
+                    getattr(self.interno, "condena", None),
+                ),
+            ),
             0, 1, alignment=Qt.AlignTop | Qt.AlignLeft
         )
         fila_detalles.addLayout(
@@ -197,8 +205,10 @@ class TarjetaInternoAsignado(QFrame):
         cont.setSpacing(2)
         lbl_titulo = QLabel(titulo)
         lbl_titulo.setStyleSheet(ESTILO_TITULO_DETALLE_PERFIL)
+        lbl_titulo.setWordWrap(True)
         lbl_valor = QLabel(valor)
         lbl_valor.setStyleSheet(ESTILO_DATO_PERFIL)
+        lbl_valor.setWordWrap(True)
         cont.addWidget(lbl_titulo)
         cont.addWidget(lbl_valor)
         return cont
@@ -223,6 +233,7 @@ class TarjetaInternoAsignado(QFrame):
 
         lbl_valor = QLabel(valor)
         lbl_valor.setStyleSheet(ESTILO_DATO_PERFIL)
+        lbl_valor.setWordWrap(True)
         cont.addLayout(fila_tit)
         cont.addWidget(lbl_valor)
 
@@ -234,6 +245,7 @@ class TarjetaInternoAsignado(QFrame):
                 )
             else:
                 lbl_extra.setStyleSheet(ESTILO_DATO_SECUNDARIO_PERFIL)
+            lbl_extra.setWordWrap(True)
             cont.addWidget(lbl_extra)
 
         return cont
@@ -279,6 +291,37 @@ class TarjetaInternoAsignado(QFrame):
         if dias <= 0:
             return "hace 0 d"
         return f"hace {dias} d"
+
+    @classmethod
+    def _texto_condena_restante(cls, fecha_ingreso, condena_anos):
+        ingreso = cls._parse_fecha_iso(fecha_ingreso)
+        if ingreso is None:
+            return "-"
+
+        try:
+            anos, meses, dias = condena_double_a_partes(condena_anos)
+            total_dias = (anos * 365) + (meses * 30) + dias
+            fin = ingreso + timedelta(days=total_dias)
+        except Exception:
+            return "-"
+
+        hoy = date.today()
+        if fin <= hoy:
+            return "Cumplida"
+
+        dias_restantes = (fin - hoy).days
+        anos_rest = dias_restantes // 365
+        meses_rest = (dias_restantes % 365) // 30
+        dias_rest = (dias_restantes % 365) % 30
+
+        partes = []
+        if anos_rest:
+            partes.append(f"{anos_rest} año" if anos_rest == 1 else f"{anos_rest} años")
+        if meses_rest:
+            partes.append(f"{meses_rest} mes" if meses_rest == 1 else f"{meses_rest} meses")
+        if dias_rest:
+            partes.append(f"{dias_rest} día" if dias_rest == 1 else f"{dias_rest} días")
+        return ", ".join(partes) if partes else "0 días"
 
     @staticmethod
     def _texto_tendencia(tendencia):
